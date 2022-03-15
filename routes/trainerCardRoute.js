@@ -16,6 +16,13 @@ cardTrainRoute.post("/", authM, async (req, res) => {
     return;
   }
 
+  let cardT = await CardTrain.findOne({ user_id: req.user._id });
+
+  if (cardT) {
+    res.status(400).send("you have already cardTrainer ");
+    return;
+  }
+
   const { error } = validateCard(req.body);
 
   if (error) {

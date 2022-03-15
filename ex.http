@@ -7,13 +7,13 @@ Content-Type: application/json
 {
      "firstName":"mousa",
      "lastName":"hammad",
-    "email":"mm@mgddfd8.com",
+    "email":"mm@mgddfd9.com",
     "city":"jerusalem",
     "password":"123456",
     "gender":"זכר",
     "dateBirthDay":"01/01/1994",
     "admin":true,
-    "dogTrainer":true,
+    "dogTrainer":false,
     "dogWalker":false,
     "image":"https://images.app.goo.gl/C9RQ7Jg6HVJtN48m6",
     "phone":"052789456"
@@ -25,7 +25,7 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"mm@mgddfd8.com",
+    "email":"mm@mgddfd9.com",
     "password":"123456"
 }
 
@@ -37,7 +37,7 @@ x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMwOTkyZTQxZWQ4NG
 
 ###
 POST  {{host}}/cardTrain
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMwOTkyZTQxZWQ4NGMzMjQ0MDliMzIiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjpmYWxzZSwiaWF0IjoxNjQ3MzUyMTMwfQ.mXOch9lJ-HmUdU444niuvSdv7pAkax4kZ8Xyjv89NR0
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMwOWI4MWJhMjUzOTJjNjc1MzVlYjAiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6ZmFsc2UsImRvZ1dhbGtlciI6ZmFsc2UsImlhdCI6MTY0NzM1MjcxNn0.3M7ALTIFYm_ndKpAohjbNq0wYDOusAcsMLKkkfIQVA0
 Content-Type: application/json
 
 {
