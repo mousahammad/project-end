@@ -1,0 +1,37 @@
+@port=3001
+@host=http://localhost:{{port}}/api
+
+POST  {{host}}/user
+Content-Type: application/json
+
+{
+     "firstName":"mousa",
+     "lastName":"hammad",
+    "email":"mm@mgddfd3.com",
+    "city":"jerusalem",
+    "password":"123456",
+    "gender":"זכר",
+    "dateBirthDay":"01/01/1994",
+    "admin":true,
+    "dogTrainer":false,
+    "dogWalker":false,
+    "phone":"052789456"
+    
+}
+###
+
+POST {{host}}/auth
+Content-Type: application/json
+
+{
+    "email":"mm@mgddfd3.com",
+    "password":"123456"
+}
+
+###
+
+GET {{host}}/user/me 
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJjYjEyODI5YjczZmZiYmY0YTM5MDMiLCJhZG1pbiI6dHJ1ZSwid2FsZmVyIjpmYWxzZSwid2Fsa2VyRG9nZ2VyIjpmYWxzZSwiaWF0IjoxNjQ3MDk2MTI5fQ.-caQsaqhzZ5Xx9wvtUL5mHxUk258KOijquK-9qlGouY
+
+
+
