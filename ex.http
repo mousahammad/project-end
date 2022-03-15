@@ -7,14 +7,15 @@ Content-Type: application/json
 {
      "firstName":"mousa",
      "lastName":"hammad",
-    "email":"mm@mgddfd3.com",
+    "email":"mm@mgddfd8.com",
     "city":"jerusalem",
     "password":"123456",
     "gender":"זכר",
     "dateBirthDay":"01/01/1994",
     "admin":true,
-    "dogTrainer":false,
+    "dogTrainer":true,
     "dogWalker":false,
+    "image":"https://images.app.goo.gl/C9RQ7Jg6HVJtN48m6",
     "phone":"052789456"
     
 }
@@ -24,14 +25,27 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"mm@mgddfd3.com",
+    "email":"mm@mgddfd8.com",
     "password":"123456"
 }
 
 ###
 
 GET {{host}}/user/me 
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJjYjEyODI5YjczZmZiYmY0YTM5MDMiLCJhZG1pbiI6dHJ1ZSwid2FsZmVyIjpmYWxzZSwid2Fsa2VyRG9nZ2VyIjpmYWxzZSwiaWF0IjoxNjQ3MDk2MTI5fQ.-caQsaqhzZ5Xx9wvtUL5mHxUk258KOijquK-9qlGouY
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMwOTkyZTQxZWQ4NGMzMjQ0MDliMzIiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjpmYWxzZSwiaWF0IjoxNjQ3MzUyMTMwfQ.mXOch9lJ-HmUdU444niuvSdv7pAkax4kZ8Xyjv89NR0
+    
 
+###
+POST  {{host}}/cardTrain
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMwOTkyZTQxZWQ4NGMzMjQ0MDliMzIiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjpmYWxzZSwiaWF0IjoxNjQ3MzUyMTMwfQ.mXOch9lJ-HmUdU444niuvSdv7pAkax4kZ8Xyjv89NR0
+Content-Type: application/json
+
+{
+    "experience":5,
+    "trainWay":true,
+    "cost":"100-200",
+    "timeTrain":1.5
+
+}
 
 
