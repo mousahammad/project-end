@@ -9,17 +9,14 @@ let schemaCard = mongoose.Schema({
     minlength: 1,
     maxlength: 99,
   },
-  trainWay: {
-    type: Boolean,
-    required: true,
-  },
+
   cost: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 400,
   },
-  timeTrain: {
+  timeWalker: {
     type: Number,
     required: true,
   },
@@ -28,20 +25,19 @@ let schemaCard = mongoose.Schema({
   user_id: { type: mongoose.Types.ObjectId, ref: "User" },
 });
 
-let CardTrain = mongoose.model("CardTrainer", schemaCard, "cardsTrainer");
+let CardWalker = mongoose.model("CardWalker", schemaCard, "cardsWalker");
 
-function validateCardT(card) {
+function validateCardW(card) {
   let schema = Joi.object({
     experience: Joi.number().min(1).max(99).required(),
-    trainWay: Joi.boolean().required(),
     cost: Joi.string().min(2).max(400).required(),
-    timeTrain: Joi.number().required(),
+    timeWalker: Joi.number().required(),
   });
 
   return schema.validate(card);
 }
 
-function validateTagsArrayT(arr) {
+function validateTagsArrayW(arr) {
   let Shcema = Joi.object({
     tags: Joi.array().min(1).max(3).required(),
   });
@@ -50,7 +46,7 @@ function validateTagsArrayT(arr) {
 }
 
 module.exports = {
-  CardTrain,
-  validateCardT,
-  validateTagsArrayT,
+  CardWalker,
+  validateCardW,
+  validateTagsArrayW,
 };

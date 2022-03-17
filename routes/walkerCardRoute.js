@@ -1,36 +1,36 @@
-const cardTrainRoute = require("express").Router();
+const cardWalkerRoute = require("express").Router();
 const { UserTable, validateUser } = require("../Models/userModel");
 const {
-  CardTrain,
-  validateCardT,
-  validateTagsArrayT,
-} = require("../Models/trainerCard");
+  CardWalker,
+  validateCardW,
+  validateTagsArrayW,
+} = require("../Models/walkerCard");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
 
-cardTrainRoute.post("/", authM, async (req, res) => {
-  if (!req.user.dogTrainer) {
-    res.status(400).send("unauthorized : you are not a trainer");
+cardWalkerRoute.post("/", authM, async (req, res) => {
+  if (!req.user.dogWalker) {
+    res.status(400).send("unauthorized : you are not a walkerDog");
     return;
   }
 
-  let cardT = await CardTrain.findOne({ user_id: req.user._id });
+  let cardW = await CardWalker.findOne({ user_id: req.user._id });
 
-  if (cardT) {
-    res.status(400).send("you have already cardTrainer ");
+  if (cardW) {
+    res.status(400).send("you have already cardWalker ");
     return;
   }
 
-  const { error } = validateCardT(req.body);
+  const { error } = validateCardW(req.body);
 
   if (error) {
     res.status(400).send(error.details[0].message);
     return;
   }
 
-  let card = new CardTrain({
+  let card = new CardWalker({
     ...req.body,
     user_id: req.user._id,
   });
@@ -39,7 +39,7 @@ cardTrainRoute.post("/", authM, async (req, res) => {
   res.send(card);
 });
 
-cardTrainRoute.put("/:id", authM, async (req, res) => {
+cardWalkerRoute.put("/:id", authM, async (req, res) => {
   try {
     // let card = await CardTrain.findOne({ _id: req.params.id, user_id: req.user._id });
     // req.body.experience = req.body.experience? req.body.experience : card.experience;
@@ -48,14 +48,14 @@ cardTrainRoute.put("/:id", authM, async (req, res) => {
     // req.body.timeTrain = req.body.timeTrain ? req.body.timeTrain: card.timeTrain;
     // req.body.bizImage = req.body.bizImage ? req.body.bizImage : card.bizImage;
 
-    const { error } = validateCardT(req.body);
+    const { error } = validateCardW(req.body);
 
     if (error) {
       res.status(400).json(error.details[0].message);
       return;
     }
 
-    card = await CardTrain.findOneAndUpdate(
+    card = await CardWalker.findOneAndUpdate(
       { _id: req.params.id, user_id: req.user._id },
       req.body
     );
@@ -64,7 +64,7 @@ cardTrainRoute.put("/:id", authM, async (req, res) => {
       return;
     }
 
-    card = await CardTrain.findById(card._id);
+    card = await CardWalker.findById(card._id);
 
     res.json(card);
   } catch (err) {
@@ -72,4 +72,4 @@ cardTrainRoute.put("/:id", authM, async (req, res) => {
   }
 });
 
-module.exports = cardTrainRoute;
+module.exports = cardWalkerRoute;
