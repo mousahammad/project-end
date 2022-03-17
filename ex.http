@@ -25,19 +25,19 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"mm@mgddfd8.com",
+    "email":"mm@mgddfd90.com",
     "password":"123456"
 }
 
 ###
 
 GET {{host}}/user/me 
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMwOTkyZTQxZWQ4NGMzMjQ0MDliMzIiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjpmYWxzZSwiaWF0IjoxNjQ3MzUyMTMwfQ.mXOch9lJ-HmUdU444niuvSdv7pAkax4kZ8Xyjv89NR0
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTAzMzR9.ukN8Qn0OnJyl3O4Ht0z6QLxhgvLxm1w62HW8RPn3UHE
     
 
 ###
 POST  {{host}}/cardTrain
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMwOTkyZTQxZWQ4NGMzMjQ0MDliMzIiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjpmYWxzZSwiaWF0IjoxNjQ3MzU5NjM4fQ.QaM8QtCPy3ODqbeSgCsoqi5OzWIRUgbgFSjZKHuwenc
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
 Content-Type: application/json
 
 {
@@ -49,9 +49,30 @@ Content-Type: application/json
 }
 
 ###
+
+put  {{host}}/cardTrain/6233035fe8b15ef536de40e1
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
+Content-Type: application/json
+
+{
+    "experience":5,
+    "trainWay":false,
+    "cost":"100-200",
+    "timeTrain":1.5
+
+}
+
+###
+delete  {{host}}/cardTrain/6233036be8b15ef536de40e4
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
+Content-Type: application/json
+
+
+
+###
 ###
 POST  {{host}}/cardWalk
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMwOTkyZTQxZWQ4NGMzMjQ0MDliMzIiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjpmYWxzZSwiaWF0IjoxNjQ3MzU5NjM4fQ.QaM8QtCPy3ODqbeSgCsoqi5OzWIRUgbgFSjZKHuwenc
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
 Content-Type: application/json
 
 {
@@ -60,6 +81,23 @@ Content-Type: application/json
     "timeWalker":1.5
 
 }
+
+###
+put  {{host}}/cardWalk/6233036be8b15ef536de40e4
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTAzMzR9.ukN8Qn0OnJyl3O4Ht0z6QLxhgvLxm1w62HW8RPn3UHE
+Content-Type: application/json
+
+{
+    "experience":7,
+    "cost":"100-200",
+    "timeWalker":1.5
+
+}
+
+###
+delete  {{host}}/cardWalk/6233036be8b15ef536de40e4
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
+Content-Type: application/json
 
 
 

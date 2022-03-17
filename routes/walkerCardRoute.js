@@ -72,4 +72,26 @@ cardWalkerRoute.put("/:id", authM, async (req, res) => {
   }
 });
 
+cardWalkerRoute.delete("/:id", authM, async (req, res) => {
+  try {
+    const card = await CardWalker.findOneAndRemove({
+      _id: req.params.id,
+      user_id: req.user._id,
+    });
+    if (!card) {
+      res.status(404).json("the card with the given Id was not found");
+      return;
+    }
+    let myId = String(card._id);
+    const users = await UserTable.updateMany(
+      {},
+      { $pull: { fDogWalker: myId } }
+    );
+
+    res.json("the card was deleted");
+  } catch (err) {
+    res.status(404).json("internal error try again ");
+  }
+});
+
 module.exports = cardWalkerRoute;
