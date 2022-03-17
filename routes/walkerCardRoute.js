@@ -55,10 +55,20 @@ cardWalkerRoute.put("/:id", authM, async (req, res) => {
       return;
     }
 
-    card = await CardWalker.findOneAndUpdate(
-      { _id: req.params.id, user_id: req.user._id },
-      req.body
-    );
+    let card = null;
+
+    if (req.user.admin) {
+      card = await CardWalker.findOneAndUpdate(
+        { _id: req.params.id },
+        req.body
+      );
+    } else {
+      card = await CardWalker.findOneAndUpdate(
+        { _id: req.params.id, user_id: req.user._id },
+        req.body
+      );
+    }
+
     if (!card) {
       res.status(404).json("the card with given ID was not found");
       return;
@@ -74,14 +84,23 @@ cardWalkerRoute.put("/:id", authM, async (req, res) => {
 
 cardWalkerRoute.delete("/:id", authM, async (req, res) => {
   try {
-    const card = await CardWalker.findOneAndRemove({
-      _id: req.params.id,
-      user_id: req.user._id,
-    });
+    let card = null;
+
+    if (req.user.admin) {
+      card = await CardWalker.findOneAndRemove({
+        _id: req.params.id,
+      });
+    } else {
+      card = await CardWalker.findOneAndRemove({
+        _id: req.params.id,
+        user_id: req.user._id,
+      });
+    }
     if (!card) {
       res.status(404).json("the card with the given Id was not found");
       return;
     }
+
     let myId = String(card._id);
     const users = await UserTable.updateMany(
       {},

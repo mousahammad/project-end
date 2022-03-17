@@ -74,16 +74,23 @@ cardTrainRoute.put("/:id", authM, async (req, res) => {
 
 cardTrainRoute.delete("/:id", authM, async (req, res) => {
   try {
-    const card = await CardTrain.findOneAndRemove({
-      _id: req.params.id,
-      user_id: req.user._id,
-    });
+    let card = null;
+
+    if (req.user.admin) {
+      card = await CardTrain.findOneAndRemove({
+        _id: req.params.id,
+      });
+    } else {
+      card = await CardTrain.findOneAndRemove({
+        _id: req.params.id,
+        user_id: req.user._id,
+      });
+    }
     if (!card) {
       res.status(404).json("the card with the given Id was not found");
       return;
     }
     let myId = String(card._id);
-    console.log(myId);
     const users = await UserTable.updateMany(
       {},
       { $pull: { fDogTrainer: myId } }
