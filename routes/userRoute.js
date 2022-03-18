@@ -10,6 +10,21 @@ userRoute.get("/me", authM, async (req, res) => {
   res.send(user);
 });
 
+userRoute.get("/", authM, async (req, res) => {
+  try {
+    let users = await UserTable.find({}).select("-password");
+
+    if (!users) {
+      res.status(404).send("no users yet");
+      return;
+    }
+
+    res.send(users);
+  } catch (err) {
+    res.status(404).send("no users yet");
+  }
+});
+
 userRoute.post("/", async (req, res) => {
   const { error } = validateUser(req.body);
   if (error) {

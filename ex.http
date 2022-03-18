@@ -1,18 +1,22 @@
 @port=3001
 @host=http://localhost:{{port}}/api
 
+
+
+
+
 POST  {{host}}/user
 Content-Type: application/json
 
 {
      "firstName":"mousa",
      "lastName":"hammad",
-    "email":"mm@mgddfd90.com",
+    "email":"mm@mgddfd900.com",
     "city":"jerusalem",
     "password":"123456",
     "gender":"זכר",
     "dateBirthDay":"01/01/1994",
-    "admin":true,
+    "admin":false,
     "dogTrainer":true,
     "dogWalker":true,
     "image":"https://images.app.goo.gl/C9RQ7Jg6HVJtN48m6",
@@ -25,7 +29,7 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"mm@mgddfd90.com",
+    "email":"mm@mgddfd2.com",
     "password":"123456"
 }
 
@@ -33,11 +37,26 @@ Content-Type: application/json
 
 GET {{host}}/user/me 
 x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTAzMzR9.ukN8Qn0OnJyl3O4Ht0z6QLxhgvLxm1w62HW8RPn3UHE
-    
+
+###
+GET {{host}}/user 
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTAzMzR9.ukN8Qn0OnJyl3O4Ht0z6QLxhgvLxm1w62HW8RPn3UHE
+
+
+
+
+###
+
+GET  {{host}}/cardTrain
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+
+
+
+   
 
 ###
 POST  {{host}}/cardTrain
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
 Content-Type: application/json
 
 {
@@ -70,9 +89,13 @@ Content-Type: application/json
 
 
 ###
+
+GET  {{host}}/cardWalk
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+
 ###
 POST  {{host}}/cardWalk
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
 Content-Type: application/json
 
 {
@@ -83,8 +106,8 @@ Content-Type: application/json
 }
 
 ###
-put  {{host}}/cardWalk/6233036be8b15ef536de40e4
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTAzMzR9.ukN8Qn0OnJyl3O4Ht0z6QLxhgvLxm1w62HW8RPn3UHE
+put  {{host}}/cardWalk/623356f17b35fd079b14cea5
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJjYjEyODI5YjczZmZiYmY0YTM5MDMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNTU1fQ.Sw1L3h0QL4I6QBmprOftR9gykiff7VGAiKYj7u2MBnw
 Content-Type: application/json
 
 {
@@ -95,8 +118,8 @@ Content-Type: application/json
 }
 
 ###
-delete  {{host}}/cardWalk/6233036be8b15ef536de40e4
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
+delete  {{host}}/cardWalk/623356707b35fd079b14cea0
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJjYjEyODI5YjczZmZiYmY0YTM5MDMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNTU1fQ.Sw1L3h0QL4I6QBmprOftR9gykiff7VGAiKYj7u2MBnw
 Content-Type: application/json
 
 

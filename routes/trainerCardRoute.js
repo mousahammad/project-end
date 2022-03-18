@@ -10,6 +10,21 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
 
+cardTrainRoute.get("/", authM, async (req, res) => {
+  try {
+    let cards = await CardTrain.find({});
+
+    if (!cards) {
+      res.status(404).send("no cards yet");
+      return;
+    }
+
+    res.send(cards);
+  } catch (err) {
+    res.status(404).send("no cards yet");
+  }
+});
+
 cardTrainRoute.post("/", authM, async (req, res) => {
   if (!req.user.dogTrainer) {
     res.status(400).send("unauthorized : you are not a trainer");

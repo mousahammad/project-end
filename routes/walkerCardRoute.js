@@ -10,6 +10,21 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
 
+cardWalkerRoute.get("/", authM, async (req, res) => {
+  try {
+    let cards = await CardWalker.find({});
+
+    if (!cards) {
+      res.status(404).send("no cards yet");
+      return;
+    }
+
+    res.send(cards);
+  } catch (err) {
+    res.status(404).send("no cards yet");
+  }
+});
+
 cardWalkerRoute.post("/", authM, async (req, res) => {
   if (!req.user.dogWalker) {
     res.status(400).send("unauthorized : you are not a walkerDog");
