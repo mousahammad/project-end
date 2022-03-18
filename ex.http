@@ -42,12 +42,21 @@ x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZW
 GET {{host}}/user 
 x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTAzMzR9.ukN8Qn0OnJyl3O4Ht0z6QLxhgvLxm1w62HW8RPn3UHE
 
+###
+GET {{host}}/user/622cb12829b73ffbbf4a3903
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTAzMzR9.ukN8Qn0OnJyl3O4Ht0z6QLxhgvLxm1w62HW8RPn3UHE
+
+
 
 
 
 ###
 
 GET  {{host}}/cardTrain
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+
+###
+GET  {{host}}/cardTrain/623355b57b35fd079b14ce95
 x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
 
 
@@ -92,6 +101,11 @@ Content-Type: application/json
 
 GET  {{host}}/cardWalk
 x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+
+###
+GET  {{host}}/cardWalk/623356f17b35fd079b14cea5
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+
 
 ###
 POST  {{host}}/cardWalk

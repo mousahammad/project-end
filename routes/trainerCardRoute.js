@@ -10,6 +10,21 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
 
+cardTrainRoute.get("/:id", authM, async (req, res) => {
+  try {
+    let card = await CardTrain.find({ _id: req.params.id });
+
+    if (!card) {
+      res.status(404).send("no card with given id");
+      return;
+    }
+
+    res.send(card);
+  } catch (err) {
+    res.status(404).send("no card with given id");
+  }
+});
+
 cardTrainRoute.get("/", authM, async (req, res) => {
   try {
     let cards = await CardTrain.find({});

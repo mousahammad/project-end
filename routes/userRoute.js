@@ -10,6 +10,21 @@ userRoute.get("/me", authM, async (req, res) => {
   res.send(user);
 });
 
+userRoute.get("/:id", authM, async (req, res) => {
+  try {
+    let user = await UserTable.find({ _id: req.params.id }).select("-password");
+
+    if (!user) {
+      res.status(404).send("no user with given id");
+      return;
+    }
+
+    res.send(user);
+  } catch (err) {
+    res.status(404).send("no user with given id");
+  }
+});
+
 userRoute.get("/", authM, async (req, res) => {
   try {
     let users = await UserTable.find({}).select("-password");
