@@ -40,6 +40,32 @@ cardTrainRoute.get("/", authM, async (req, res) => {
   }
 });
 
+cardTrainRoute.patch("/addT", authM, async (req, res) => {
+  try {
+    let user = await UserTable.updateOne(
+      { _id: req.user._id },
+      { $addToSet: { fDogTrainer: { $each: req.body.fDogTrainer } } }
+    );
+
+    user = await UserTable.findById(req.user._id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).send("internal error");
+  }
+});
+
+cardTrainRoute.patch("/deleteT", authM, async (req, res) => {
+  try {
+    let user = await UserTable.updateOne(
+      { _id: req.user._id },
+      { $pull: { fDogTrainer: { $in: req.body.fDogTrainer } } }
+    );
+    user = await UserTable.findById(req.user._id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).send("internal error");
+  }
+});
 cardTrainRoute.post("/", authM, async (req, res) => {
   if (!req.user.dogTrainer) {
     res.status(400).send("unauthorized : you are not a trainer");

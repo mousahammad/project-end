@@ -29,9 +29,13 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"mm@mgddfd2.com",
+    "email":"mm@mgddfd900.com",
     "password":"123456"
 }
+
+###
+
+
 
 ###
 
@@ -95,6 +99,25 @@ delete  {{host}}/cardTrain/6233036be8b15ef536de40e4
 x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
 Content-Type: application/json
 
+###
+
+PATCH {{host}}/cardTrain/addT
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NzA0ODU1fQ.W0oTnDqf_ydMHM0OKK7IZ8fqMXQ29-PgfjKZKOmzon4
+Content-Type: application/json
+
+{
+    "fDogTrainer":["2344545","dfsdfgdfg","2344545"]
+}
+
+###
+
+PATCH {{host}}/cardTrain/deleteT
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NzA0ODU1fQ.W0oTnDqf_ydMHM0OKK7IZ8fqMXQ29-PgfjKZKOmzon4
+Content-Type: application/json
+
+{
+    "fDogTrainer":["2344545","dfsdfgdfg","2344545"]
+}
 
 
 ###
@@ -135,6 +158,26 @@ Content-Type: application/json
 delete  {{host}}/cardWalk/623356707b35fd079b14cea0
 x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJjYjEyODI5YjczZmZiYmY0YTM5MDMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNTU1fQ.Sw1L3h0QL4I6QBmprOftR9gykiff7VGAiKYj7u2MBnw
 Content-Type: application/json
+
+###
+
+PATCH {{host}}/cardWalk/addW
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NzA0ODU1fQ.W0oTnDqf_ydMHM0OKK7IZ8fqMXQ29-PgfjKZKOmzon4
+Content-Type: application/json
+
+{
+    "fDogWalker":["2344545","dfsdfgdfg","2344545"]
+}
+
+###
+
+PATCH {{host}}/cardWalk/deleteW
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NzA0ODU1fQ.W0oTnDqf_ydMHM0OKK7IZ8fqMXQ29-PgfjKZKOmzon4
+Content-Type: application/json
+
+{
+    "fDogWalker":["2344545","dfsdfgdfg","2344545"]
+}
 
 
 

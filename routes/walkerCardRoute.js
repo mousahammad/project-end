@@ -40,6 +40,33 @@ cardWalkerRoute.get("/", authM, async (req, res) => {
   }
 });
 
+cardWalkerRoute.patch("/addW", authM, async (req, res) => {
+  try {
+    let user = await UserTable.updateOne(
+      { _id: req.user._id },
+      { $addToSet: { fDogWalker: { $each: req.body.fDogWalker } } }
+    );
+
+    user = await UserTable.findById(req.user._id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).send("internal error");
+  }
+});
+
+cardWalkerRoute.patch("/deleteW", authM, async (req, res) => {
+  try {
+    let user = await UserTable.updateOne(
+      { _id: req.user._id },
+      { $pull: { fDogWalker: { $in: req.body.fDogWalker } } }
+    );
+    user = await UserTable.findById(req.user._id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).send("internal error");
+  }
+});
+
 cardWalkerRoute.post("/", authM, async (req, res) => {
   if (!req.user.dogWalker) {
     res.status(400).send("unauthorized : you are not a walkerDog");
