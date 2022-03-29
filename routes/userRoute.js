@@ -4,6 +4,8 @@ const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
+const config = require("config");
+const jwt = require("jsonwebtoken");
 
 userRoute.get("/me", authM, async (req, res) => {
   let user = await UserTable.findOne({ _id: req.user._id }).select("-password");
@@ -76,5 +78,38 @@ userRoute.post("/", async (req, res) => {
     ])
   );
 });
+
+// userRoute.post("/forgot-password", async (req, res) => {
+//   // const { error } = validateEmail(req.body);
+//   // if (error) {
+//   //   console.error(chalk.redBright(error.message));
+//   //   return res.status(400).send(error.details[0].message);
+//   // }
+
+//   const { email } = req.body;
+//   try {
+//     let user = await UserTable.findOne({ email: e });
+//     if (!user)
+//       return res
+//         .status(400)
+//         .send("לא נמצא המשתמש עם כתובת המייל הזאת במאגר המידע");
+
+//     const secret = config.get("token") + user.password;
+//     const token = jwt.sign({ _id: user._id, email: user.email }, secret, {
+//       expiresIn: "15m",
+//     });
+
+//     const subject = "anu-architects password reset";
+//     const link = `http://localhost:3001/private-area/reset-password/${user._id}/${token}`;
+//     const mail = { userId: user._id, token: token };
+//     const html = generateTemplate(mail).resetPassword;
+
+//     const response = await mailReq(user.email, subject, link, html);
+//     return res.send(response);
+//   } catch (error) {
+//     //console.error(chalk.redBright(error.message));
+//     return res.status(500).send(`Opss... An error occurred: ${error.message}`);
+//   }
+// });
 
 module.exports = userRoute;
