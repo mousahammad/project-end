@@ -119,6 +119,14 @@ function validateTrainerArray(arr) {
   return Shcema.validate(arr);
 }
 
+function validateEmail(mail) {
+  let Shcema = Joi.object({
+    email: Joi.string().min(6).max(255).required().email(),
+  });
+
+  return Shcema.validate(mail);
+}
+
 function validateWalkerArray(arr) {
   let Shcema = Joi.object({
     fDogWalker: Joi.array().min(1).required(),
@@ -133,4 +141,5 @@ module.exports = {
   validateUser,
   validateTrainerArray,
   validateWalkerArray,
+  validateEmail,
 };
