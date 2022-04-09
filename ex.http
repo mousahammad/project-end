@@ -11,7 +11,7 @@ Content-Type: application/json
 {
      "firstName":"mousa",
      "lastName":"hammad",
-    "email":"mm@mgddfd900.com",
+    "email":"mousa909@outlook.co.il",
     "city":"jerusalem",
     "password":"123456",
     "gender":"זכר",
@@ -29,11 +29,32 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"mm@mgddfd900.com",
+    "email":"mousa909@outlook.co.il",
     "password":"123456"
 }
 
 ###
+POST {{host}}/user/forgot-password
+Content-Type: application/json
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTExOTc2fQ.eq1UYbO-1N2ofGzHsMfFFvvvfG1d4vOHUBwyjdqtVuo
+
+{
+    "email":"mousa909@outlook.co.il"
+}
+
+###
+
+PUT {{host}}/user/reset-password
+Content-Type: application/json
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTExOTc2fQ.eq1UYbO-1N2ofGzHsMfFFvvvfG1d4vOHUBwyjdqtVuo
+
+{
+    "_id":"6245a480bb51fdd508e28755",
+    "tokenRef":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTAzNDMyLCJleHAiOjE2NDk1MDQzMzJ9.b0gjVPVGeBWPpw6wf0KzQQG5-h_Haq9lFmkE0cM13y0",
+    "password":"1234567"
+}
+
+
 
 
 
