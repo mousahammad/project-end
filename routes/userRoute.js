@@ -85,6 +85,57 @@ userRoute.post("/", async (req, res) => {
   );
 });
 
+userRoute.put("/", authM, async (req, res) => {
+  try {
+    let user = await UserTable.findOne({ _id: req.user._id });
+    req.body.password = user.password;
+    req.body.image = req.body.image ? req.body.image : user.image;
+    const { error } = validateUser(req.body);
+    if (error) {
+      res.status(400).send(error.details[0].message);
+      return;
+    }
+
+    user = await UserTable.updateOne(
+      { _id: req.user._id },
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        city: req.body.city,
+        admin: req.body.admin,
+        gender: req.body.gender,
+        dateBirthDay: req.body.dateBirthDay,
+        dogTrainer: req.body.dogTrainer,
+        dogWalker: req.body.dogWalker,
+        phone: req.body.phone,
+        image: req.body.image,
+      }
+    );
+
+    user = await UserTable.findOne({ _id: req.user._id });
+
+    res.send(
+      _.pick(user, [
+        "_id",
+        "firstName",
+        "lastName",
+        "email",
+        "city",
+        "admin",
+        "gender",
+        "dateBirthDay",
+        "dogTrainer",
+        "dogWalker",
+        "phone",
+        "image",
+      ])
+    );
+  } catch (err) {
+    res.status(404).send("error on save data");
+  }
+});
+
 userRoute.put("/reset-password", authM, async (req, res) => {
   try {
     const { _id, tokenRef, password } = req.body;
@@ -137,7 +188,7 @@ userRoute.post("/forgot-password", authM, async (req, res) => {
       }
     );
 
-    const subject = "pr-dog password reset";
+    const subject = "Project-Dog password reset;";
     const link = `http://localhost:3001/private-area/reset-password/${user._id}/${token}`;
     const mail = { userId: user._id, token: token };
     const html = generateTemplate(mail).resetPassword;

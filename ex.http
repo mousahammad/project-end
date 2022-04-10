@@ -25,6 +25,27 @@ Content-Type: application/json
 }
 ###
 
+PUT {{host}}/user
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTg3NDI1fQ.IAQTGik7x6JY1iSKH-de6qRAZEnF3eeu1Ms9yPPS8zA
+Content-Type: application/json
+
+{
+    "firstName":"mousa",
+     "lastName":"hammad",
+    "email":"mousa909@outlook.co.il",
+    "city":"jerusalem",
+    "gender":"זכר",
+    "dateBirthDay":"01/01/1994",
+    "admin":false,
+    "dogTrainer":true,
+    "dogWalker":true,
+    "image":"https://images.app.goo.gl/C9RQ7Jg6HVJtN48m6",
+    "phone":"052789456"
+
+}
+
+###
+
 POST {{host}}/auth
 Content-Type: application/json
 
@@ -35,8 +56,8 @@ Content-Type: application/json
 
 ###
 POST {{host}}/user/forgot-password
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTg3NDI1fQ.IAQTGik7x6JY1iSKH-de6qRAZEnF3eeu1Ms9yPPS8zA
 Content-Type: application/json
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTExOTc2fQ.eq1UYbO-1N2ofGzHsMfFFvvvfG1d4vOHUBwyjdqtVuo
 
 {
     "email":"mousa909@outlook.co.il"
@@ -46,7 +67,7 @@ x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzND
 
 PUT {{host}}/user/reset-password
 Content-Type: application/json
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTExOTc2fQ.eq1UYbO-1N2ofGzHsMfFFvvvfG1d4vOHUBwyjdqtVuo
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTg3NDI1fQ.IAQTGik7x6JY1iSKH-de6qRAZEnF3eeu1Ms9yPPS8zA
 
 {
     "_id":"6245a480bb51fdd508e28755",
