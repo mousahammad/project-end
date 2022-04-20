@@ -13,10 +13,14 @@ const jwt = require("jsonwebtoken");
 const { mailReq } = require("../services/mailReq");
 const { generateTemplate } = require("../services/generateTemplate");
 
+//get information about connect user
+
 userRoute.get("/me", authM, async (req, res) => {
   let user = await UserTable.findOne({ _id: req.user._id }).select("-password");
   res.send(user);
 });
+
+//get user by id
 
 userRoute.get("/:id", authM, async (req, res) => {
   try {
@@ -33,6 +37,8 @@ userRoute.get("/:id", authM, async (req, res) => {
   }
 });
 
+//get all users in the database.
+
 userRoute.get("/", authM, async (req, res) => {
   try {
     let users = await UserTable.find({}).select("-password");
@@ -48,43 +54,50 @@ userRoute.get("/", authM, async (req, res) => {
   }
 });
 
+//sign up new user
+
 userRoute.post("/", async (req, res) => {
-  const { error } = validateUser(req.body);
-  if (error) {
-    res.status(400).send(error.details[0].message);
-    return;
+  try {
+    const { error } = validateUser(req.body);
+    if (error) {
+      res.status(400).send(error.details[0].message);
+      return;
+    }
+
+    let user = await UserTable.findOne({ email: req.body.email });
+
+    if (user) {
+      res.status(400).send("the user is already exists");
+      return;
+    }
+
+    user = new UserTable(req.body);
+    const salt = await bcrypt.genSalt(12);
+    user.password = await bcrypt.hash(user.password, salt);
+    user = await user.save();
+
+    res.send(
+      _.pick(user, [
+        "_id",
+        "firstName",
+        "lastName",
+        "email",
+        "city",
+        "admin",
+        "gender",
+        "dateBirthDay",
+        "dogTrainer",
+        "dogWalker",
+        "phone",
+        "image",
+      ])
+    );
+  } catch (err) {
+    res.status(404).send("error on save data");
   }
-
-  let user = await UserTable.findOne({ email: req.body.email });
-
-  if (user) {
-    res.status(400).send("the user is already exists");
-    return;
-  }
-
-  user = new UserTable(req.body);
-  const salt = await bcrypt.genSalt(12);
-  user.password = await bcrypt.hash(user.password, salt);
-  user = await user.save();
-
-  res.send(
-    _.pick(user, [
-      "_id",
-      "firstName",
-      "lastName",
-      "email",
-      "city",
-      "admin",
-      "gender",
-      "dateBirthDay",
-      "dogTrainer",
-      "dogWalker",
-      "phone",
-      "image",
-    ])
-  );
 });
 
+//update current user
 userRoute.put("/", authM, async (req, res) => {
   try {
     let user = await UserTable.findOne({ _id: req.user._id });
@@ -136,6 +149,8 @@ userRoute.put("/", authM, async (req, res) => {
   }
 });
 
+//reset password after we recive the link from the email
+
 userRoute.put("/reset-password", authM, async (req, res) => {
   try {
     const { _id, tokenRef, password } = req.body;
@@ -156,14 +171,17 @@ userRoute.put("/reset-password", authM, async (req, res) => {
   }
 });
 
-userRoute.post("/forgot-password", authM, async (req, res) => {
-  const { error } = validateEmail(req.body);
-  if (error) {
-    return res.status(400).send(error.details[0].message);
-  }
+//send mail to the user in order  to reset password
 
-  const { email } = req.body;
+userRoute.post("/forgot-password", authM, async (req, res) => {
   try {
+    const { error } = validateEmail(req.body);
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
+
+    const { email } = req.body;
+
     let user = await UserTable.findOne({ email });
     if (!user)
       return res

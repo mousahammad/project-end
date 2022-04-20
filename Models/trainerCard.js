@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 const _ = require("lodash");
 
+//schema fro trainer card
 let schemaCard = mongoose.Schema({
   experience: {
     type: Number,
@@ -30,6 +31,8 @@ let schemaCard = mongoose.Schema({
 
 let CardTrain = mongoose.model("CardTrainer", schemaCard, "cardsTrainer");
 
+//validtion
+
 function validateCardT(card) {
   let schema = Joi.object({
     experience: Joi.number().min(1).max(99).required(),
@@ -40,6 +43,8 @@ function validateCardT(card) {
 
   return schema.validate(card);
 }
+
+//validation for tags array
 
 function validateTagsArrayT(arr) {
   let Shcema = Joi.object({

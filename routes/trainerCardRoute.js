@@ -10,6 +10,8 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
 
+//return card by id
+
 cardTrainRoute.get("/:id", authM, async (req, res) => {
   try {
     let card = await CardTrain.find({ _id: req.params.id });
@@ -24,6 +26,8 @@ cardTrainRoute.get("/:id", authM, async (req, res) => {
     res.status(404).send("no card with given id");
   }
 });
+
+//return all the cards
 
 cardTrainRoute.get("/", authM, async (req, res) => {
   try {
@@ -40,6 +44,8 @@ cardTrainRoute.get("/", authM, async (req, res) => {
   }
 });
 
+//add favorite card to user array
+
 cardTrainRoute.patch("/addT", authM, async (req, res) => {
   try {
     let user = await UserTable.updateOne(
@@ -54,6 +60,8 @@ cardTrainRoute.patch("/addT", authM, async (req, res) => {
   }
 });
 
+//delete favorite card from the user array ,the function recive array of cards and delete them
+
 cardTrainRoute.patch("/deleteT", authM, async (req, res) => {
   try {
     let user = await UserTable.updateOne(
@@ -66,44 +74,45 @@ cardTrainRoute.patch("/deleteT", authM, async (req, res) => {
     res.status(404).send("internal error");
   }
 });
+
+//create new card .
 cardTrainRoute.post("/", authM, async (req, res) => {
-  if (!req.user.dogTrainer) {
-    res.status(400).send("unauthorized : you are not a trainer");
-    return;
+  try {
+    if (!req.user.dogTrainer) {
+      res.status(400).send("unauthorized : you are not a trainer");
+      return;
+    }
+
+    let cardT = await CardTrain.findOne({ user_id: req.user._id });
+
+    if (cardT) {
+      res.status(400).send("you have already cardTrainer ");
+      return;
+    }
+
+    const { error } = validateCardT(req.body);
+
+    if (error) {
+      res.status(400).send(error.details[0].message);
+      return;
+    }
+
+    let card = new CardTrain({
+      ...req.body,
+      user_id: req.user._id,
+    });
+
+    card = await card.save();
+    res.send(card);
+  } catch (err) {
+    res.status(404).send("the card was not created");
   }
-
-  let cardT = await CardTrain.findOne({ user_id: req.user._id });
-
-  if (cardT) {
-    res.status(400).send("you have already cardTrainer ");
-    return;
-  }
-
-  const { error } = validateCardT(req.body);
-
-  if (error) {
-    res.status(400).send(error.details[0].message);
-    return;
-  }
-
-  let card = new CardTrain({
-    ...req.body,
-    user_id: req.user._id,
-  });
-
-  card = await card.save();
-  res.send(card);
 });
+
+//update card by idCard.
 
 cardTrainRoute.put("/:id", authM, async (req, res) => {
   try {
-    // let card = await CardTrain.findOne({ _id: req.params.id, user_id: req.user._id });
-    // req.body.experience = req.body.experience? req.body.experience : card.experience;
-    // req.body.trainWay = req.body.trainWay ? req.body.trainWay : card.trainWay;
-    // req.body.cost= req.body.cost ? req.body.cost : card.cost;
-    // req.body.timeTrain = req.body.timeTrain ? req.body.timeTrain: card.timeTrain;
-    // req.body.bizImage = req.body.bizImage ? req.body.bizImage : card.bizImage;
-
     const { error } = validateCardT(req.body);
 
     if (error) {
@@ -111,10 +120,17 @@ cardTrainRoute.put("/:id", authM, async (req, res) => {
       return;
     }
 
-    card = await CardTrain.findOneAndUpdate(
-      { _id: req.params.id, user_id: req.user._id },
-      req.body
-    );
+    let card = null;
+
+    if (req.user.admin) {
+      card = await CardTrain.findOneAndUpdate({ _id: req.params.id }, req.body);
+    } else {
+      card = await CardTrain.findOneAndUpdate(
+        { _id: req.params.id, user_id: req.user._id },
+        req.body
+      );
+    }
+
     if (!card) {
       res.status(404).json("the card with given ID was not found");
       return;
@@ -127,6 +143,8 @@ cardTrainRoute.put("/:id", authM, async (req, res) => {
     res.status(404).json("internal error try again ");
   }
 });
+
+//delete card by id
 
 cardTrainRoute.delete("/:id", authM, async (req, res) => {
   try {

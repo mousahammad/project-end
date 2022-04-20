@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 const _ = require("lodash");
 
+//schema
 let schemaCard = mongoose.Schema({
   experience: {
     type: Number,
@@ -26,6 +27,8 @@ let schemaCard = mongoose.Schema({
 });
 
 let CardWalker = mongoose.model("CardWalker", schemaCard, "cardsWalker");
+
+//validtion
 
 function validateCardW(card) {
   let schema = Joi.object({

@@ -3,6 +3,7 @@ const Joi = require("joi");
 const { UserTable } = require("../Models/userModel");
 const bcrypt = require("bcrypt");
 
+//log in
 authRoute.post("/", async (req, res) => {
   const { error } = validateAut(req.body);
 

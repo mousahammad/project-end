@@ -3,6 +3,7 @@ const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
+//schema for user
 let schemaUser = new mongoose.Schema({
   firstName: {
     type: String,
@@ -77,6 +78,7 @@ let schemaUser = new mongoose.Schema({
   },
 });
 
+//create token
 schemaUser.methods.generateAutToken = function () {
   return jwt.sign(
     {
@@ -88,6 +90,8 @@ schemaUser.methods.generateAutToken = function () {
     config.get("token")
   );
 };
+
+//validaton
 
 function validateUser(user) {
   const shcema = Joi.object({
@@ -111,6 +115,8 @@ function validateUser(user) {
   return shcema.validate(user);
 }
 
+//validation for favorite array
+
 function validateTrainerArray(arr) {
   let Shcema = Joi.object({
     fDogTrainer: Joi.array().min(1).required(),
@@ -118,6 +124,8 @@ function validateTrainerArray(arr) {
 
   return Shcema.validate(arr);
 }
+
+//validation for email
 
 function validateEmail(mail) {
   let Shcema = Joi.object({

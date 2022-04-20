@@ -10,6 +10,8 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
 
+//get card by given id
+
 cardWalkerRoute.get("/:id", authM, async (req, res) => {
   try {
     let card = await CardWalker.find({ _id: req.params.id });
@@ -24,6 +26,8 @@ cardWalkerRoute.get("/:id", authM, async (req, res) => {
     res.status(404).send("no card with given id");
   }
 });
+
+//get all cards in dataBase
 
 cardWalkerRoute.get("/", authM, async (req, res) => {
   try {
@@ -40,6 +44,8 @@ cardWalkerRoute.get("/", authM, async (req, res) => {
   }
 });
 
+//add favorite card in user array
+
 cardWalkerRoute.patch("/addW", authM, async (req, res) => {
   try {
     let user = await UserTable.updateOne(
@@ -54,6 +60,8 @@ cardWalkerRoute.patch("/addW", authM, async (req, res) => {
   }
 });
 
+//delete favortie card from user array
+
 cardWalkerRoute.patch("/deleteW", authM, async (req, res) => {
   try {
     let user = await UserTable.updateOne(
@@ -66,6 +74,8 @@ cardWalkerRoute.patch("/deleteW", authM, async (req, res) => {
     res.status(404).send("internal error");
   }
 });
+
+//create new card
 
 cardWalkerRoute.post("/", authM, async (req, res) => {
   if (!req.user.dogWalker) {
@@ -96,15 +106,9 @@ cardWalkerRoute.post("/", authM, async (req, res) => {
   res.send(card);
 });
 
+//update card by given id
 cardWalkerRoute.put("/:id", authM, async (req, res) => {
   try {
-    // let card = await CardTrain.findOne({ _id: req.params.id, user_id: req.user._id });
-    // req.body.experience = req.body.experience? req.body.experience : card.experience;
-    // req.body.trainWay = req.body.trainWay ? req.body.trainWay : card.trainWay;
-    // req.body.cost= req.body.cost ? req.body.cost : card.cost;
-    // req.body.timeTrain = req.body.timeTrain ? req.body.timeTrain: card.timeTrain;
-    // req.body.bizImage = req.body.bizImage ? req.body.bizImage : card.bizImage;
-
     const { error } = validateCardW(req.body);
 
     if (error) {
@@ -138,6 +142,8 @@ cardWalkerRoute.put("/:id", authM, async (req, res) => {
     res.status(404).json("internal error try again ");
   }
 });
+
+//delete card by given id
 
 cardWalkerRoute.delete("/:id", authM, async (req, res) => {
   try {
