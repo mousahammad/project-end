@@ -132,7 +132,9 @@ cardTrainRoute.put("/:id", authM, async (req, res) => {
     }
 
     if (!card) {
-      res.status(404).json("the card with given ID was not found");
+      res
+        .status(404)
+        .json("the card with given ID was not found or havnt Permissions");
       return;
     }
 

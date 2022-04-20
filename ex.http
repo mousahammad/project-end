@@ -11,12 +11,12 @@ Content-Type: application/json
 {
      "firstName":"mousa",
      "lastName":"hammad",
-    "email":"mousa909@outlook.co.il",
+    "email":"mousa909@outlook1.co.il",
     "city":"jerusalem",
     "password":"123456",
     "gender":"זכר",
     "dateBirthDay":"01/01/1994",
-    "admin":false,
+    "admin":true,
     "dogTrainer":true,
     "dogWalker":true,
     "image":"https://images.app.goo.gl/C9RQ7Jg6HVJtN48m6",
@@ -50,7 +50,7 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"mousa909@outlook.co.il",
+    "email":"mousa909@outlook1.co.il",
     "password":"123456"
 }
 
@@ -124,15 +124,15 @@ Content-Type: application/json
 
 ###
 
-put  {{host}}/cardTrain/6233035fe8b15ef536de40e1
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTE4NjF9.-BPjClnPtgCkx1RcA3UXnppQqVeVx9mONRM08SIvHFM
+put  {{host}}/cardTrain/623355b57b35fd079b14ce95
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTg3NDI1fQ.IAQTGik7x6JY1iSKH-de6qRAZEnF3eeu1Ms9yPPS8zA
 Content-Type: application/json
 
 {
     "experience":5,
     "trainWay":false,
     "cost":"100-200",
-    "timeTrain":1.5
+    "timeTrain":2
 
 }
 
