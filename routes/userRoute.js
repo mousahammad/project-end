@@ -12,6 +12,8 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const { mailReq } = require("../services/mailReq");
 const { generateTemplate } = require("../services/generateTemplate");
+const { CardTrain } = require("../Models/trainerCard");
+const { CardWalker } = require("../Models/walkerCard");
 
 //get information about connect user
 
@@ -107,6 +109,40 @@ userRoute.put("/", authM, async (req, res) => {
     if (error) {
       res.status(400).send(error.details[0].message);
       return;
+    }
+
+    if (req.body.email !== user.email) {
+      let newEmail = await UserTable.find({ email: req.body.email });
+
+      if (newEmail.length) {
+        res.status(400).send("האימייל הזה כבר רשום במערכת");
+        return;
+      }
+    }
+
+    if (!req.body.dogTrainer) {
+      let card = await CardTrain.find({ user_id: req.user._id });
+
+      if (card.length) {
+        res
+          .status(400)
+          .send(
+            "לא ניתן לעדכן דוג-טרינר מכיוון שקיים לך כרטיס של דוג טרינר .ניתן למחוק הכרטיס ואז לנסות שוב"
+          );
+        return;
+      }
+    }
+
+    if (!req.body.dogWalker) {
+      let card = await CardWalker.find({ user_id: req.user._id });
+      if (card.length) {
+        res
+          .status(400)
+          .send(
+            "לא ניתן לעדכן דוג-ווקר מכיוון שקיים לך כרטיס של דוג ווקר .ניתן למחק הכרטיס ואז לנסות שוב"
+          );
+        return;
+      }
     }
 
     user = await UserTable.updateOne(

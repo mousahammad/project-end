@@ -2,8 +2,12 @@
 @host=http://localhost:{{port}}/api
 
 
+GET {{host}}/user/me
+Content-Type: application/json
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTg3NDI1fQ.IAQTGik7x6JY1iSKH-de6qRAZEnF3eeu1Ms9yPPS8zA
 
 
+###
 
 POST  {{host}}/user
 Content-Type: application/json
@@ -26,13 +30,13 @@ Content-Type: application/json
 ###
 
 PUT {{host}}/user
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTg3NDI1fQ.IAQTGik7x6JY1iSKH-de6qRAZEnF3eeu1Ms9yPPS8zA
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjUwNzIzOTU4fQ.cQoDVkEmLBXj4I2VNMdV-Vz4wJh5a7Qn4LFn8fA7Jgg
 Content-Type: application/json
 
 {
     "firstName":"mousa",
      "lastName":"hammad",
-    "email":"mousa909@outlook.co.il",
+    "email":"mm@mgddfd900.com",
     "city":"jerusalem",
     "gender":"זכר",
     "dateBirthDay":"01/01/1994",
@@ -50,7 +54,7 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"mousa909@outlook1.co.il",
+    "email":"mm@mgddfd900.com",
     "password":"123456"
 }
 
