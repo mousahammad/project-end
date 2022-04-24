@@ -1,5 +1,9 @@
 const cardTrainRoute = require("express").Router();
-const { UserTable, validateUser } = require("../Models/userModel");
+const {
+  UserTable,
+  validateUser,
+  validateTrainerArray,
+} = require("../Models/userModel");
 const {
   CardTrain,
   validateCardT,
@@ -48,6 +52,13 @@ cardTrainRoute.get("/", authM, async (req, res) => {
 
 cardTrainRoute.patch("/addT", authM, async (req, res) => {
   try {
+    const { error } = validateTrainerArray(req.body);
+
+    if (error) {
+      res.status(400).send(error.data[0].message);
+      return;
+    }
+
     let user = await UserTable.updateOne(
       { _id: req.user._id },
       { $addToSet: { fDogTrainer: { $each: req.body.fDogTrainer } } }

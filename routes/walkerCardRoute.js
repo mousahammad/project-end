@@ -1,5 +1,9 @@
 const cardWalkerRoute = require("express").Router();
-const { UserTable, validateUser } = require("../Models/userModel");
+const {
+  UserTable,
+  validateUser,
+  validateWalkerArray,
+} = require("../Models/userModel");
 const {
   CardWalker,
   validateCardW,
@@ -48,6 +52,12 @@ cardWalkerRoute.get("/", authM, async (req, res) => {
 
 cardWalkerRoute.patch("/addW", authM, async (req, res) => {
   try {
+    const { error } = validateWalkerArray(req.body);
+    if (error) {
+      res.status(400).send(error.details[0].message);
+      return;
+    }
+
     let user = await UserTable.updateOne(
       { _id: req.user._id },
       { $addToSet: { fDogWalker: { $each: req.body.fDogWalker } } }
