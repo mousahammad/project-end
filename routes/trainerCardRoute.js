@@ -189,4 +189,25 @@ cardTrainRoute.delete("/:id", authM, async (req, res) => {
   }
 });
 
+cardTrainRoute.post("/updateMeet/:cardId", authM, async (req, res) => {
+  try {
+    let data = req.body;
+
+    if (!data) {
+      res.status(400).send("אין נתונים");
+      return;
+    }
+
+    console.log(data);
+    let user = await CardTrain.updateOne(
+      { _id: req.params.cardId },
+      { $set: { meets: data } }
+    );
+
+    res.send(user);
+  } catch (err) {
+    res.status(404).send("תקלה בשמירת הנתונים");
+  }
+});
+
 module.exports = cardTrainRoute;

@@ -4,7 +4,7 @@
 
 GET {{host}}/user/me
 Content-Type: application/json
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzNDY5ZjYzMDFlYTgiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ5NTg3NDI1fQ.IAQTGik7x6JY1iSKH-de6qRAZEnF3eeu1Ms9yPPS8zA
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjUwNzIzOTU4fQ.cQoDVkEmLBXj4I2VNMdV-Vz4wJh5a7Qn4LFn8fA7Jgg
 
 
 ###
@@ -40,7 +40,7 @@ Content-Type: application/json
     "city":"jerusalem",
     "gender":"זכר",
     "dateBirthDay":"01/01/1994",
-    "admin":false,
+    "admin":true,
     "dogTrainer":true,
     "dogWalker":true,
     "image":"https://images.app.goo.gl/C9RQ7Jg6HVJtN48m6",
@@ -107,7 +107,7 @@ x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZD
 
 ###
 GET  {{host}}/cardTrain/623355b57b35fd079b14ce95
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjUwNzIzOTU4fQ.cQoDVkEmLBXj4I2VNMdV-Vz4wJh5a7Qn4LFn8fA7Jgg
 
 
 
@@ -115,7 +115,7 @@ x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZD
 
 ###
 POST  {{host}}/cardTrain
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjUwNzIzOTU4fQ.cQoDVkEmLBXj4I2VNMdV-Vz4wJh5a7Qn4LFn8fA7Jgg
 Content-Type: application/json
 
 {
@@ -163,6 +163,26 @@ Content-Type: application/json
 
 {
     "fDogTrainer":["2344545","dfsdfgdfg","2344545"]
+}
+
+###
+
+
+POST {{host}}/cardTrain/updateMeet/623355b57b35fd079b14ce95
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+Content-Type: application/json
+
+{
+
+    
+"sun":[{"ava":false},{"time":"10-11","ava":true}],
+"mon":[{"ava":true},{"time":"10-11","ava":true}],
+"tues":[{"ava":true},{"time":"10-11","ava":true}],
+"wen":[{"ava":true},{"time":"10-11","ava":true}],
+"turs":[{"ava":true},{"time":"10-11","ava":true}],
+"fri":[{"ava":true},{"time":"10-11","ava":true}],
+"sat":[{"ava":true},{"time":"10-11","ava":true}]
+    
 }
 
 
