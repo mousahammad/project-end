@@ -15,7 +15,7 @@ Content-Type: application/json
 {
      "firstName":"mousa",
      "lastName":"hammad",
-    "email":"mousa909@outlook1.co.il",
+    "email":"m1@m.com",
     "city":"jerusalem",
     "password":"123456",
     "gender":"זכר",
@@ -54,7 +54,7 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"mm@mgddfd900.com",
+    "email":"m1@m.com",
     "password":"123456"
 }
 
@@ -115,14 +115,23 @@ x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZD
 
 ###
 POST  {{host}}/cardTrain
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjUwNzIzOTU4fQ.cQoDVkEmLBXj4I2VNMdV-Vz4wJh5a7Qn4LFn8fA7Jgg
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZkMTkzYjg0MWE0ZjhmNWE5NWExMDciLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NTEzMTcwNjB9.x9HQC5wZvN7mHsNgSZw1M1qH_4X_2MLHQ1aQ-9hVSP8
 Content-Type: application/json
 
 {
     "experience":5,
     "trainWay":true,
     "cost":"100-200",
-    "timeTrain":1.5
+    "timeTrain":1.5,
+    "meets":{"sun":[{"ava":false},{"time":"10-11","ava":true}],
+"mon":[{"ava":true},{"time":"10-11","ava":true}],
+"tues":[{"ava":true},{"time":"10-11","ava":true}],
+"wen":[{"ava":true},{"time":"10-11","ava":true}],
+"turs":[{"ava":true},{"time":"10-11","ava":true}],
+"fri":[{"ava":true},{"time":"10-11","ava":true}],
+"sat":[{"ava":true},{"time":"10-11","ava":true}]
+}
+    
 
 }
 
