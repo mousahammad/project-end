@@ -22,6 +22,15 @@ let schemaCard = mongoose.Schema({
     required: true,
   },
   tags: Array,
+  meets: {
+    sun: Object,
+    mon: Object,
+    tues: Object,
+    wen: Object,
+    turs: Object,
+    fri: Object,
+    sat: Object,
+  },
 
   user_id: { type: mongoose.Types.ObjectId, ref: "User" },
 });

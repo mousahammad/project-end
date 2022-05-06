@@ -101,7 +101,7 @@ cardTrainRoute.post("/", authM, async (req, res) => {
       return;
     }
 
-    const data = _.omit(req.body, ["meets"]);
+    const data = _.omit(req.body, ["meets", "tags"]);
     const { error } = validateCardT(data);
 
     if (error) {
@@ -125,7 +125,7 @@ cardTrainRoute.post("/", authM, async (req, res) => {
 
 cardTrainRoute.put("/:id", authM, async (req, res) => {
   try {
-    const data = _.omit(req.body, ["meets"]);
+    const data = _.omit(req.body, ["meets", "tags"]);
     const { error } = validateCardT(data);
 
     if (error) {

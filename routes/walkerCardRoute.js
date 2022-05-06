@@ -100,7 +100,9 @@ cardWalkerRoute.post("/", authM, async (req, res) => {
     return;
   }
 
-  const { error } = validateCardW(req.body);
+  const data = _.omit(req.body, ["meets", "tags"]);
+
+  const { error } = validateCardW(data);
 
   if (error) {
     res.status(400).send(error.details[0].message);
@@ -119,7 +121,8 @@ cardWalkerRoute.post("/", authM, async (req, res) => {
 //update card by given id
 cardWalkerRoute.put("/:id", authM, async (req, res) => {
   try {
-    const { error } = validateCardW(req.body);
+    const data = _.omit(req.body, ["meets", "tags"]);
+    const { error } = validateCardW(data);
 
     if (error) {
       res.status(400).json(error.details[0].message);
