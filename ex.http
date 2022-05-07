@@ -54,7 +54,7 @@ POST {{host}}/auth
 Content-Type: application/json
 
 {
-    "email":"m1@m.com",
+    "email":"m@m.com",
     "password":"123456"
 }
 
@@ -86,7 +86,7 @@ x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjUxNmM4YTE0OWIzND
 ###
 
 GET {{host}}/user/me 
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzMDMyZGU4YjE1ZWY1MzZkZTQwZGMiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NDc1MTAzMzR9.ukN8Qn0OnJyl3O4Ht0z6QLxhgvLxm1w62HW8RPn3UHE
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZkMTkzYjg0MWE0ZjhmNWE5NWExMDciLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NTEzMTcwNjB9.x9HQC5wZvN7mHsNgSZw1M1qH_4X_2MLHQ1aQ-9hVSP8
 
 ###
 GET {{host}}/user 
@@ -203,11 +203,17 @@ Content-Type: application/json
     
 }
 
+###
+
+GET  {{host}}/cardWalk/
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+
 
 ###
 
-GET  {{host}}/cardWalk
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjMzNTU4NjdiMzVmZDA3OWIxNGNlOTEiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOnRydWUsImRvZ1dhbGtlciI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNDI3fQ.fv-dIrUuE1C0XvwH2p_jXbwg1LXnh7Cqqv5JX2_1g84
+
+GET  {{host}}/cardWalk/byUser/626d13f28762a4a6a7794eed
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZkMTNmMjg3NjJhNGE2YTc3OTRlZWQiLCJhZG1pbiI6dHJ1ZSwiZG9nVHJhaW5lciI6dHJ1ZSwiZG9nV2Fsa2VyIjp0cnVlLCJpYXQiOjE2NTE5MDE4NjV9.VnN6RQ1fdGnKGfyJBHfOuOJU6xlCylJJl3fvlI2rnc4
 
 ###
 GET  {{host}}/cardWalk/623356f17b35fd079b14cea5
