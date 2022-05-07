@@ -14,6 +14,23 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
 
+//get card by given user Id
+
+cardWalkerRoute.get("/byUser/:id", authM, async (req, res) => {
+  try {
+    let card = await CardWalker.find({ user_id: req.params.id });
+
+    if (card.length == 0) {
+      res.status(400).send("no card with given user id");
+      return;
+    }
+
+    res.send(card[0]);
+  } catch (err) {
+    res.status(404).send("no data");
+  }
+});
+
 //get card by given id
 
 cardWalkerRoute.get("/:id", authM, async (req, res) => {

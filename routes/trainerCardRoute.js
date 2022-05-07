@@ -31,6 +31,23 @@ cardTrainRoute.get("/:id", authM, async (req, res) => {
   }
 });
 
+//get card by given user Id
+
+cardTrainRoute.get("/byUser/:id", authM, async (req, res) => {
+  try {
+    let card = await CardTrain.find({ user_id: req.params.id });
+
+    if (card.length == 0) {
+      res.status(400).send("no card with given user id");
+      return;
+    }
+
+    res.send(card[0]);
+  } catch (err) {
+    res.status(404).send("no data");
+  }
+});
+
 //return all the cards
 
 cardTrainRoute.get("/", authM, async (req, res) => {

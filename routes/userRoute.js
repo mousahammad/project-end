@@ -18,8 +18,18 @@ const { CardWalker } = require("../Models/walkerCard");
 //get information about connect user
 
 userRoute.get("/me", authM, async (req, res) => {
-  let user = await UserTable.findOne({ _id: req.user._id }).select("-password");
-  res.send(user);
+  try {
+    let user = await UserTable.findOne({ _id: req.user._id }).select(
+      "-password"
+    );
+    if (!user) {
+      res.status(400).send("המשתמש לא קיים במערכת יותר");
+      return;
+    }
+    res.send(user);
+  } catch (err) {
+    res.status(404).send("נתונים שגוים");
+  }
 });
 
 //get user by id
