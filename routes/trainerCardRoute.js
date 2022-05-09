@@ -103,6 +103,30 @@ cardTrainRoute.patch("/deleteT", authM, async (req, res) => {
   }
 });
 
+//check if th card exists in the array favorite
+
+cardTrainRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
+  try {
+    let idCard = req.params.idCard;
+
+    if (!idCard) {
+      res.status(400).send("מספר הכרטיס ריק תנסה שוב");
+      return;
+    }
+
+    let card = await UserTable.find({ fDogTrainer: idCard });
+
+    if (card.length == 0) {
+      res.status(200).send(false);
+      return;
+    }
+
+    res.status(200).send(true);
+  } catch (err) {
+    res.status(404).send("internal error");
+  }
+});
+
 //create new card .
 cardTrainRoute.post("/", authM, async (req, res) => {
   try {
