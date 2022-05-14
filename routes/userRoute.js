@@ -14,6 +14,21 @@ const { mailReq } = require("../services/mailReq");
 const { generateTemplate } = require("../services/generateTemplate");
 const { CardTrain } = require("../Models/trainerCard");
 const { CardWalker } = require("../Models/walkerCard");
+const { upload } = require("../services/upload");
+
+userRoute.post("/saveImage", async (req, res) => {
+  try {
+    upload(req, res, (err) => {
+      if (err) {
+        res.sendStatus(500);
+      }
+    });
+
+    res.status(200).send("התמונה עלתה");
+  } catch (err) {
+    res.status(400).send("תקלה פנימית נסה שוב");
+  }
+});
 
 //get information about connect user
 

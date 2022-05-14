@@ -102,7 +102,7 @@ cardWalkerRoute.patch("/deleteW", authM, async (req, res) => {
   }
 });
 
-//check if th card exists in the array favorite
+//check if th card exists in favorite array
 
 cardWalkerRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
   try {

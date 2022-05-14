@@ -63,8 +63,8 @@ let schemaUser = new mongoose.Schema({
     maxlength: 10,
   },
   image: {
-    type: String,
-    //required: true,
+    type: Boolean,
+    required: false,
     minlength: 11,
     maxlength: 1024,
   },
@@ -110,7 +110,7 @@ function validateUser(user) {
       .max(10)
       .required()
       .regex(/^0[2-9]\d{7,8}$/),
-    image: Joi.string().min(11).max(1024).uri(),
+    image: Joi.boolean(),
   });
   return shcema.validate(user);
 }
