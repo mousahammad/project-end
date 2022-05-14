@@ -189,22 +189,23 @@ userRoute.put("/", authM, async (req, res) => {
 
     user = await UserTable.findOne({ _id: req.user._id });
 
-    res.send(
-      _.pick(user, [
-        "_id",
-        "firstName",
-        "lastName",
-        "email",
-        "city",
-        "admin",
-        "gender",
-        "dateBirthDay",
-        "dogTrainer",
-        "dogWalker",
-        "phone",
-        "image",
-      ])
-    );
+    const token = user.generateAutToken();
+    user = _.pick(user, [
+      "_id",
+      "firstName",
+      "lastName",
+      "email",
+      "city",
+      "admin",
+      "gender",
+      "dateBirthDay",
+      "dogTrainer",
+      "dogWalker",
+      "phone",
+      "image",
+    ]);
+
+    res.send({ user, token });
   } catch (err) {
     res.status(404).send("error on save data");
   }
