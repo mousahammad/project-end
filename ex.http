@@ -252,8 +252,15 @@ Content-Type: application/json
 }
 
 ###
+GET  {{host}}/cardWalk/getAllFavoriteWalker
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjdmYjQxYWY3N2FhYjUwOGNjZmQ2ZjkiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOmZhbHNlLCJkb2dXYWxrZXIiOnRydWUsImlhdCI6MTY1MjYzODA2OX0.dZWgdusSIp_xY3FMPjNs_JofiSPcAS9SnMvF-XVZ0HA
+Content-Type: application/json
+
+
+
+###
 delete  {{host}}/cardWalk/623356707b35fd079b14cea0
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJjYjEyODI5YjczZmZiYmY0YTM5MDMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjQ3NTMxNTU1fQ.Sw1L3h0QL4I6QBmprOftR9gykiff7VGAiKYj7u2MBnw
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjdmYjQxYWY3N2FhYjUwOGNjZmQ2ZjkiLCJhZG1pbiI6ZmFsc2UsImRvZ1RyYWluZXIiOmZhbHNlLCJkb2dXYWxrZXIiOnRydWUsImlhdCI6MTY1MjYzODA2OX0.dZWgdusSIp_xY3FMPjNs_JofiSPcAS9SnMvF-XVZ0HA
 Content-Type: application/json
 
 ###

@@ -14,6 +14,22 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
 
+cardWalkerRoute.get("/getAllFavoriteWalker", authM, async (req, res) => {
+  try {
+    let favorite = await UserTable.findById(req.user._id);
+
+    let cards = [];
+
+    for (let i = 0; i < favorite.fDogWalker.length; i++) {
+      let card = await CardWalker.findById(favorite.fDogWalker[i]);
+      let user = await UserTable.findById(card.user_id).select("-password");
+      cards.push({ card: card, user: user });
+    }
+
+    res.status(200).send(cards);
+  } catch (err) {}
+});
+
 //get card by given user Id
 
 cardWalkerRoute.get("/byUser/:id", authM, async (req, res) => {
