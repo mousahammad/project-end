@@ -14,6 +14,23 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const authM = require("../middleWare/authM");
 
+//return all favorite card trainer for current user.
+cardTrainRoute.get("/getAllFavoriteTrainer", authM, async (req, res) => {
+  try {
+    let favorite = await UserTable.findById(req.user._id);
+
+    let cards = [];
+
+    for (let i = 0; i < favorite.fDogTrainer.length; i++) {
+      let card = await CardTrain.findById(favorite.fDogTrainer[i]);
+      let user = await UserTable.findById(card.user_id).select("-password");
+      cards.push({ card: card, user: user });
+    }
+
+    res.status(200).send(cards);
+  } catch (err) {}
+});
+
 //return card by id
 
 cardTrainRoute.get("/:id", authM, async (req, res) => {
