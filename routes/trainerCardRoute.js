@@ -31,6 +31,26 @@ cardTrainRoute.get("/getAllFavoriteTrainer", authM, async (req, res) => {
   } catch (err) {}
 });
 
+//get card by tag
+cardTrainRoute.get("/serchByTag/:tag", authM, async (req, res) => {
+  try {
+    let tag = req.params.tag;
+    let info = [];
+
+    if (!tag) {
+      res.status(400).send("לא נשלח תאג לחיפוש");
+    }
+    let cards = await CardTrain.find({ tags: tag });
+
+    for (let i = 0; i < cards.length; i++) {
+      let user = await UserTable.findById(cards[i].user_id);
+      info.push({ card: cards[i], user: user });
+    }
+
+    res.status(200).send(info);
+  } catch (err) {}
+});
+
 //return card by id
 
 cardTrainRoute.get("/:id", authM, async (req, res) => {
