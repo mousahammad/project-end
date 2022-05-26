@@ -151,7 +151,7 @@ cardTrainRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
       return;
     }
 
-    let card = await UserTable.find({ fDogTrainer: idCard });
+    let card = await UserTable.find({ _id: req.user._id, fDogTrainer: idCard });
 
     if (card.length == 0) {
       res.status(200).send(false);

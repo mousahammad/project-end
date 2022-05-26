@@ -149,7 +149,7 @@ cardWalkerRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
       return;
     }
 
-    let card = await UserTable.find({ fDogWalker: idCard });
+    let card = await UserTable.find({ _id: req.user._id, fDogWalker: idCard });
 
     if (card.length == 0) {
       res.status(200).send(false);
