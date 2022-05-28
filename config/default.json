@@ -2,5 +2,19 @@
   "token": "MousPrivateKey",
   "service": "hotmail",
   "email": "projectdog30@outlook.co.il",
-  "pass": "Project1234!"
+  "pass": "Project1234!",
+  "admin": {
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "projectdog30@outlook.co.il",
+    "city": "tel-aviv",
+    "password": "123456",
+    "gender": "male",
+    "dateBirthDay": "1988-04-05",
+    "admin": true,
+    "dogTrainer": true,
+    "dogWalker": true,
+    "phone": "0532458521",
+    "image": false
+  }
 }

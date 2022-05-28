@@ -11,6 +11,8 @@ const { mySoket } = require("./db/soket");
 const { Server } = require("socket.io");
 
 app.use(cors());
+
+require("./services/createAdmin");
 const server = http.createServer(app);
 const io = mySoket(server);
 
