@@ -213,14 +213,11 @@ userRoute.put("/", authM, async (req, res) => {
 
 //reset password after we recive the link from the email
 
-userRoute.put("/reset-password", authM, async (req, res) => {
+userRoute.put("/reset-password", async (req, res) => {
   try {
     const { _id, tokenRef, password } = req.body;
     const decoded = jwt.verify(tokenRef, config.get("token"));
 
-    if (req.user._id !== decoded._id) {
-      return res.status(400).send("תקלה בזיהוי");
-    }
     let user = await UserTable.findOne({ _id: decoded._id });
     if (!user) return res.status(400).send("לא נמצא המשתמש במאגר");
 
@@ -235,7 +232,7 @@ userRoute.put("/reset-password", authM, async (req, res) => {
 
 //send mail to the user in order  to reset password
 
-userRoute.post("/forgot-password", authM, async (req, res) => {
+userRoute.post("/forgot-password", async (req, res) => {
   try {
     const { error } = validateEmail(req.body);
     if (error) {
@@ -249,10 +246,6 @@ userRoute.post("/forgot-password", authM, async (req, res) => {
       return res
         .status(400)
         .send("לא נמצא המשתמש עם כתובת המייל הזאת במאגר המידע");
-
-    if (req.user._id != user._id) {
-      return res.status(400).send("תקלה בזיהוי");
-    }
 
     const secret = config.get("token");
     const token = jwt.sign(
