@@ -7,7 +7,7 @@ function generateTemplate(mail) {
                   <h2 align="right" cellpadding='0'>לחץ על הלינק על מנת לאפס את הסיסמה</h2>
               </td>
           </tr>
-          <tr ><td><p>http://localhost:3000/private-area/reset-password/${mail.userId}/${mail.token}</p></td></tr>
+          <tr ><td><p>http://localhost:3000/reset-password/${mail.userId}/${mail.token}</p></td></tr>
           <tr ><td align="right"><p>לשאלות נוספות ניתן לפנות לכתובת המייל</p></td></tr>
           <tr ><td align="right">anu.arch.rl@gmail.com</td></tr>
       </table>`,

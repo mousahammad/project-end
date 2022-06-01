@@ -262,7 +262,7 @@ userRoute.post("/forgot-password", async (req, res) => {
     );
 
     const subject = "Project-Dog password reset;";
-    const link = `http://localhost:3001/private-area/reset-password/${user._id}/${token}`;
+    const link = `http://localhost:3001/reset-password/${user._id}/${token}`;
     const mail = { userId: user._id, token: token };
     const html = generateTemplate(mail).resetPassword;
 
