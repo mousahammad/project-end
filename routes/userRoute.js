@@ -15,6 +15,7 @@ const { generateTemplate } = require("../services/generateTemplate");
 const { CardTrain } = require("../Models/trainerCard");
 const { CardWalker } = require("../Models/walkerCard");
 const { upload } = require("../services/upload");
+const { AwsClient } = require("google-auth-library");
 
 userRoute.post("/saveImage", async (req, res) => {
   try {
@@ -68,14 +69,26 @@ userRoute.get("/:id", authM, async (req, res) => {
 
 userRoute.get("/", authM, async (req, res) => {
   try {
+    let usersInfo = [];
     let users = await UserTable.find({}).select("-password");
 
-    if (!users) {
+    if (users.length === 0) {
       res.status(404).send("no users yet");
       return;
     }
 
-    res.send(users);
+    for (let i = 0; i < users.length; i++) {
+      let train = await CardTrain.find({ user_id: users[i]._id });
+      let walker = await CardWalker.find({ user_id: users[i]._id });
+
+      usersInfo.push({
+        user: users[i],
+        cardWalker: walker[0],
+        cardTrainer: train[0],
+      });
+    }
+
+    res.status(200).send(usersInfo);
   } catch (err) {
     res.status(404).send("no users yet");
   }
@@ -125,9 +138,9 @@ userRoute.post("/", async (req, res) => {
 });
 
 //update current user
-userRoute.put("/", authM, async (req, res) => {
+userRoute.put("/:id", authM, async (req, res) => {
   try {
-    let user = await UserTable.findOne({ _id: req.user._id });
+    let user = await UserTable.findOne({ _id: req.params.id });
     req.body.password = user.password;
     req.body.image = req.body.image ? req.body.image : user.image;
     const { error } = validateUser(req.body);
@@ -146,7 +159,7 @@ userRoute.put("/", authM, async (req, res) => {
     }
 
     if (!req.body.dogTrainer) {
-      let card = await CardTrain.find({ user_id: req.user._id });
+      let card = await CardTrain.find({ user_id: req.params.id });
 
       if (card.length) {
         res
@@ -159,7 +172,7 @@ userRoute.put("/", authM, async (req, res) => {
     }
 
     if (!req.body.dogWalker) {
-      let card = await CardWalker.find({ user_id: req.user._id });
+      let card = await CardWalker.find({ user_id: req.params.id });
       if (card.length) {
         res
           .status(400)
@@ -171,7 +184,7 @@ userRoute.put("/", authM, async (req, res) => {
     }
 
     user = await UserTable.updateOne(
-      { _id: req.user._id },
+      { _id: req.params.id },
       {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -187,7 +200,7 @@ userRoute.put("/", authM, async (req, res) => {
       }
     );
 
-    user = await UserTable.findOne({ _id: req.user._id });
+    user = await UserTable.findOne({ _id: req.params.id });
 
     const token = user.generateAutToken();
     user = _.pick(user, [
