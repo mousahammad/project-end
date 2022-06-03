@@ -16,6 +16,7 @@ const { CardTrain } = require("../Models/trainerCard");
 const { CardWalker } = require("../Models/walkerCard");
 const { upload } = require("../services/upload");
 const { AwsClient } = require("google-auth-library");
+const fs = require("fs");
 
 userRoute.post("/saveImage", async (req, res) => {
   try {
@@ -26,6 +27,31 @@ userRoute.post("/saveImage", async (req, res) => {
     });
 
     res.status(200).send("התמונה עלתה");
+  } catch (err) {
+    res.status(400).send("תקלה פנימית נסה שוב");
+  }
+});
+
+//delete image from server
+userRoute.put("/deleteImage/:path", async (req, res) => {
+  try {
+    if (!req.params.path) {
+      res.status(404).send("לא נשלח נתיב תקין");
+      return;
+    }
+    fs.unlink(`./public/images/${req.params.path}.jpg`, (err) => {
+      if (err) {
+        res.status(404).send("תקלה לא נמחקה תמונה");
+        return;
+      }
+    });
+
+    let user = await UserTable.updateOne(
+      { _id: req.params.path },
+      { image: false }
+    );
+
+    res.status(200).send("התמונה נמחקה בהצלחה");
   } catch (err) {
     res.status(400).send("תקלה פנימית נסה שוב");
   }
@@ -140,7 +166,15 @@ userRoute.post("/", async (req, res) => {
 //update current user
 userRoute.put("/:id", authM, async (req, res) => {
   try {
-    let user = await UserTable.findOne({ _id: req.params.id });
+    let updateId = "";
+
+    if (req.user.admin && req.user._id !== req.params.id) {
+      updateId = req.params.id;
+    } else {
+      updateId = req.user._id;
+    }
+
+    let user = await UserTable.findOne({ _id: updateId });
     req.body.password = user.password;
     req.body.image = req.body.image ? req.body.image : user.image;
     const { error } = validateUser(req.body);
@@ -159,7 +193,7 @@ userRoute.put("/:id", authM, async (req, res) => {
     }
 
     if (!req.body.dogTrainer) {
-      let card = await CardTrain.find({ user_id: req.params.id });
+      let card = await CardTrain.find({ user_id: updateId });
 
       if (card.length) {
         res
@@ -172,7 +206,7 @@ userRoute.put("/:id", authM, async (req, res) => {
     }
 
     if (!req.body.dogWalker) {
-      let card = await CardWalker.find({ user_id: req.params.id });
+      let card = await CardWalker.find({ user_id: updateId });
       if (card.length) {
         res
           .status(400)
@@ -184,7 +218,7 @@ userRoute.put("/:id", authM, async (req, res) => {
     }
 
     user = await UserTable.updateOne(
-      { _id: req.params.id },
+      { _id: updateId },
       {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -200,7 +234,7 @@ userRoute.put("/:id", authM, async (req, res) => {
       }
     );
 
-    user = await UserTable.findOne({ _id: req.params.id });
+    user = await UserTable.findOne({ _id: req.user._id });
 
     const token = user.generateAutToken();
     user = _.pick(user, [
