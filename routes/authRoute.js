@@ -27,6 +27,8 @@ authRoute.post("/", async (req, res) => {
       return;
     }
 
+    await UserTable.updateOne({ _id: user._id }, { onLine: true });
+
     res.json({
       token: user.generateAutToken(),
     });

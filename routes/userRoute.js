@@ -57,6 +57,53 @@ userRoute.put("/deleteImage/:path", async (req, res) => {
   }
 });
 
+//update online user
+userRoute.put("/updateOnline", authM, async (req, res) => {
+  try {
+    await UserTable.updateOne({ _id: req.user._id }, { onLine: true });
+    res.status(200).send("עודכן");
+  } catch (err) {
+    res.status(400).send("תקלה פנימית נסה שוב");
+  }
+});
+
+//update offline user
+userRoute.put("/updateOffline", authM, async (req, res) => {
+  try {
+    await UserTable.updateOne({ _id: req.user._id }, { onLine: false });
+    res.status(200).send("עודכן");
+  } catch (err) {
+    res.status(400).send("תקלה פנימית נסה שוב");
+  }
+});
+
+//get status online
+userRoute.get("/getStatusOnline", authM, async (req, res) => {
+  try {
+    let user = await UserTable.findOne({ _id: req.user._id });
+
+    res.status(200).send(user.onLine);
+  } catch (err) {
+    res.status(400).send("תקלה פנימית נסה שוב");
+  }
+});
+
+//get all users online
+userRoute.get("/getUsersOnline", authM, async (req, res) => {
+  try {
+    let users = await UserTable.find({ onLine: true }).select("-password");
+
+    if (users.length === 0) {
+      res.status(400).send("אין משתמשים מחוברים");
+      return;
+    }
+
+    res.status(200).send(users);
+  } catch (err) {
+    res.status(400).send("תקלה פנימית נסה שוב");
+  }
+});
+
 //get information about connect user
 
 userRoute.get("/me", authM, async (req, res) => {

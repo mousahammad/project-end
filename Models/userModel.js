@@ -69,6 +69,11 @@ let schemaUser = new mongoose.Schema({
     maxlength: 1024,
   },
 
+  onLine: {
+    type: Boolean,
+    required: false,
+  },
+
   fDogWalker: Array,
   fDogTrainer: Array,
 
