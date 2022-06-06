@@ -39,12 +39,16 @@ userRoute.put("/deleteImage/:path", async (req, res) => {
       res.status(404).send("לא נשלח נתיב תקין");
       return;
     }
-    fs.unlink(`./public/images/${req.params.path}.jpg`, (err) => {
-      if (err) {
-        res.status(404).send("תקלה לא נמחקה תמונה");
-        return;
-      }
-    });
+
+    try {
+      fs.statSync(`./public/images/${req.params.path}.jpg`);
+      fs.unlink(`./public/images/${req.params.path}.jpg`, (err) => {
+        if (err) {
+          res.status(404).send("תקלה לא נמחקה תמונה");
+          return;
+        }
+      });
+    } catch (e) {}
 
     let user = await UserTable.updateOne(
       { _id: req.params.path },
