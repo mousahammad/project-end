@@ -81,6 +81,20 @@ userRoute.put("/updateOffline", authM, async (req, res) => {
   }
 });
 
+//get static online
+userRoute.get("/statusOnlineOffline", authM, async (req, res) => {
+  try {
+    let users = await UserTable.find({});
+    let onLine = await UserTable.find({ onLine: true });
+
+    res
+      .status(200)
+      .send({ numberUser: users.length, numberOnline: onLine.length });
+  } catch (err) {
+    res.status(400).send("תקלה פנימית נסה שוב");
+  }
+});
+
 //get status online
 userRoute.get("/getStatusOnline", authM, async (req, res) => {
   try {
