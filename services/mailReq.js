@@ -5,6 +5,7 @@ const res = require("express/lib/response");
 
 //mail:projectdog30@outlook.co.il
 //pass:Project1234!
+//send email by admin's mail
 async function mailReq(to, subject, text, html) {
   try {
     const transport = nodemailer.createTransport({

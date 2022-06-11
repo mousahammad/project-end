@@ -7,6 +7,8 @@ const bcrypt = require("bcrypt");
 
 const config = require("config");
 
+//create admin when the server on
+
 const createAdmin = async (admin) => {
   try {
     let user = await UserTable.findOne({ email: admin.email });

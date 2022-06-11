@@ -1,6 +1,7 @@
 const multer = require("multer");
 const fs = require("fs");
 
+//upload picture name
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/images");

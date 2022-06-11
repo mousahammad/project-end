@@ -58,13 +58,13 @@ cardTrainRoute.get("/:id", authM, async (req, res) => {
     let card = await CardTrain.find({ _id: req.params.id });
 
     if (!card) {
-      res.status(404).send("no card with given id");
+      res.status(404).send("אין כרטיס כזה");
       return;
     }
 
     res.send(card);
   } catch (err) {
-    res.status(404).send("no card with given id");
+    res.status(404).send("אין כרטיס כזה");
   }
 });
 
@@ -75,13 +75,13 @@ cardTrainRoute.get("/byUser/:id", authM, async (req, res) => {
     let card = await CardTrain.find({ user_id: req.params.id });
 
     if (card.length == 0) {
-      res.status(400).send("no card with given user id");
+      res.status(400).send("אין כרטיס ליוזר הזה");
       return;
     }
 
     res.send(card[0]);
   } catch (err) {
-    res.status(404).send("no data");
+    res.status(404).send("אין נתונים");
   }
 });
 
@@ -92,13 +92,13 @@ cardTrainRoute.get("/", authM, async (req, res) => {
     let cards = await CardTrain.find({});
 
     if (!cards) {
-      res.status(404).send("no cards yet");
+      res.status(404).send("אין כרטיסים");
       return;
     }
 
     res.send(cards);
   } catch (err) {
-    res.status(404).send("no cards yet");
+    res.status(404).send("אין כרטיסים");
   }
 });
 
@@ -168,14 +168,14 @@ cardTrainRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
 cardTrainRoute.post("/", authM, async (req, res) => {
   try {
     if (!req.user.dogTrainer) {
-      res.status(400).send("unauthorized : you are not a trainer");
+      res.status(400).send("אינך מאלף כלבים לכן לא ניתן לייצר כרטיס");
       return;
     }
 
     let cardT = await CardTrain.findOne({ user_id: req.user._id });
 
     if (cardT) {
-      res.status(400).send("you have already cardTrainer ");
+      res.status(400).send("יש לך כרטיס מאלף כלבים ");
       return;
     }
 
@@ -223,9 +223,7 @@ cardTrainRoute.put("/:id", authM, async (req, res) => {
     }
 
     if (!card) {
-      res
-        .status(404)
-        .json("the card with given ID was not found or havnt Permissions");
+      res.status(404).json("אין כרטיס כזה או אין לך הרשאות");
       return;
     }
 
@@ -254,7 +252,7 @@ cardTrainRoute.delete("/:id", authM, async (req, res) => {
       });
     }
     if (!card) {
-      res.status(404).json("the card with the given Id was not found");
+      res.status(404).json("הכרטיס לא קיים");
       return;
     }
     let myId = String(card._id);
@@ -263,12 +261,13 @@ cardTrainRoute.delete("/:id", authM, async (req, res) => {
       { $pull: { fDogTrainer: myId } }
     );
 
-    res.json("the card was deleted");
+    res.json("הכרטיס נמחק");
   } catch (err) {
     res.status(404).json("internal error try again ");
   }
 });
 
+//update clock's work
 cardTrainRoute.post("/updateMeet/:cardId", authM, async (req, res) => {
   try {
     let data = req.body;

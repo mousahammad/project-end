@@ -18,6 +18,8 @@ const { upload } = require("../services/upload");
 const { AwsClient } = require("google-auth-library");
 const fs = require("fs");
 
+//save image in database
+
 userRoute.post("/saveImage", async (req, res) => {
   try {
     upload(req, res, (err) => {
@@ -152,7 +154,7 @@ userRoute.get("/:id", authM, async (req, res) => {
 
     res.send(user);
   } catch (err) {
-    res.status(404).send("no user with given id");
+    res.status(404).send("אין משתמש כזה");
   }
 });
 
@@ -164,7 +166,7 @@ userRoute.get("/", authM, async (req, res) => {
     let users = await UserTable.find({}).select("-password");
 
     if (users.length === 0) {
-      res.status(404).send("no users yet");
+      res.status(404).send("אין משתמשים במערכת");
       return;
     }
 
@@ -198,7 +200,7 @@ userRoute.post("/", async (req, res) => {
     let user = await UserTable.findOne({ email: req.body.email });
 
     if (user) {
-      res.status(400).send("the user is already exists");
+      res.status(400).send("המשתמש קיים במערכת");
       return;
     }
 
@@ -225,6 +227,68 @@ userRoute.post("/", async (req, res) => {
     );
   } catch (err) {
     res.status(404).send("error on save data");
+  }
+});
+
+//reset password after we recive the link from the email
+
+userRoute.put("/reset-password", async (req, res) => {
+  try {
+    const { _id, tokenRef, password } = req.body;
+    const decoded = jwt.verify(tokenRef, config.get("token"));
+
+    let user = await UserTable.findOne({ _id: decoded._id });
+    if (!user) return res.status(400).send("לא נמצא המשתמש במאגר");
+
+    const salt = await bcrypt.genSalt(12);
+    user.password = await bcrypt.hash(password, salt);
+    user = await UserTable.updateOne({ _id }, { password: user.password });
+    res.status(200).send("הסיסמה עודכנה בהצלחה");
+  } catch (err) {
+    res.status(400).send("תקלה בעדכון סיסמה");
+  }
+});
+
+//send mail to the user in order  to reset password
+
+userRoute.post("/forgot-password", async (req, res) => {
+  try {
+    const { error } = validateEmail(req.body);
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
+
+    const { email } = req.body;
+
+    let user = await UserTable.findOne({ email });
+    if (!user)
+      return res
+        .status(400)
+        .send("לא נמצא המשתמש עם כתובת המייל הזאת במאגר המידע");
+
+    const secret = config.get("token");
+    const token = jwt.sign(
+      {
+        _id: user._id,
+        admin: user.admin,
+        dogTrainer: user.dogTrainer,
+        dogWalker: user.dogWalker,
+      },
+      secret,
+      {
+        expiresIn: "15m",
+      }
+    );
+
+    const subject = "Project-Dog password reset;";
+    const link = `http://localhost:3001/reset-password/${user._id}/${token}`;
+    const mail = { userId: user._id, token: token };
+    const html = generateTemplate(mail).resetPassword;
+
+    const response = await mailReq(user.email, subject, link, html);
+    return res.send(response);
+  } catch (error) {
+    return res.status(500).send(`Opss... An error occurred: ${error.message}`);
   }
 });
 
@@ -320,68 +384,6 @@ userRoute.put("/:id", authM, async (req, res) => {
     res.send({ user, token });
   } catch (err) {
     res.status(404).send("error on save data");
-  }
-});
-
-//reset password after we recive the link from the email
-
-userRoute.put("/reset-password", async (req, res) => {
-  try {
-    const { _id, tokenRef, password } = req.body;
-    const decoded = jwt.verify(tokenRef, config.get("token"));
-
-    let user = await UserTable.findOne({ _id: decoded._id });
-    if (!user) return res.status(400).send("לא נמצא המשתמש במאגר");
-
-    const salt = await bcrypt.genSalt(12);
-    user.password = await bcrypt.hash(password, salt);
-    user = await UserTable.updateOne({ _id }, { password: user.password });
-    res.status(200).send("הסיסמה עודכנה בהצלחה");
-  } catch (err) {
-    res.status(400).send("תקלה בעדכון סיסמה");
-  }
-});
-
-//send mail to the user in order  to reset password
-
-userRoute.post("/forgot-password", async (req, res) => {
-  try {
-    const { error } = validateEmail(req.body);
-    if (error) {
-      return res.status(400).send(error.details[0].message);
-    }
-
-    const { email } = req.body;
-
-    let user = await UserTable.findOne({ email });
-    if (!user)
-      return res
-        .status(400)
-        .send("לא נמצא המשתמש עם כתובת המייל הזאת במאגר המידע");
-
-    const secret = config.get("token");
-    const token = jwt.sign(
-      {
-        _id: user._id,
-        admin: user.admin,
-        dogTrainer: user.dogTrainer,
-        dogWalker: user.dogWalker,
-      },
-      secret,
-      {
-        expiresIn: "15m",
-      }
-    );
-
-    const subject = "Project-Dog password reset;";
-    const link = `http://localhost:3001/reset-password/${user._id}/${token}`;
-    const mail = { userId: user._id, token: token };
-    const html = generateTemplate(mail).resetPassword;
-
-    const response = await mailReq(user.email, subject, link, html);
-    return res.send(response);
-  } catch (error) {
-    return res.status(500).send(`Opss... An error occurred: ${error.message}`);
   }
 });
 

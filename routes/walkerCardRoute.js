@@ -57,7 +57,7 @@ cardWalkerRoute.get("/byUser/:id", authM, async (req, res) => {
     let card = await CardWalker.find({ user_id: req.params.id });
 
     if (card.length == 0) {
-      res.status(400).send("no card with given user id");
+      res.status(400).send("אין כרטיס כזה");
       return;
     }
 
@@ -74,13 +74,13 @@ cardWalkerRoute.get("/:id", authM, async (req, res) => {
     let card = await CardWalker.find({ _id: req.params.id });
 
     if (!card) {
-      res.status(404).send("no card with given id");
+      res.status(404).send("אין כרטיס כזה");
       return;
     }
 
     res.send(card);
   } catch (err) {
-    res.status(404).send("no card with given id");
+    res.status(404).send("אין כרטיס כזה");
   }
 });
 
@@ -91,13 +91,13 @@ cardWalkerRoute.get("/", authM, async (req, res) => {
     let cards = await CardWalker.find({});
 
     if (!cards) {
-      res.status(404).send("no cards yet");
+      res.status(404).send("עדיין אין כרטיסים במערכת");
       return;
     }
 
     res.send(cards);
   } catch (err) {
-    res.status(404).send("no cards yet");
+    res.status(404).send("עדיין אין כרטיסים במערכת");
   }
 });
 
@@ -166,14 +166,14 @@ cardWalkerRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
 
 cardWalkerRoute.post("/", authM, async (req, res) => {
   if (!req.user.dogWalker) {
-    res.status(400).send("unauthorized : you are not a walkerDog");
+    res.status(400).send("אינך דוגווקר לכן לא ניתן לייצר כרטיס כזה");
     return;
   }
 
   let cardW = await CardWalker.findOne({ user_id: req.user._id });
 
   if (cardW) {
-    res.status(400).send("you have already cardWalker ");
+    res.status(400).send("יש לך כרטיס מסוג דוגווקר ");
     return;
   }
 
@@ -221,7 +221,7 @@ cardWalkerRoute.put("/:id", authM, async (req, res) => {
     }
 
     if (!card) {
-      res.status(404).json("the card with given ID was not found");
+      res.status(404).json("הכרטיס אינו קיים");
       return;
     }
 
@@ -250,7 +250,7 @@ cardWalkerRoute.delete("/:id", authM, async (req, res) => {
       });
     }
     if (!card) {
-      res.status(404).json("the card with the given Id was not found");
+      res.status(404).json("הכרטיס אינו קיים");
       return;
     }
 
@@ -260,7 +260,7 @@ cardWalkerRoute.delete("/:id", authM, async (req, res) => {
       { $pull: { fDogWalker: myId } }
     );
 
-    res.json("the card was deleted");
+    res.json("הכרטיס נמחק");
   } catch (err) {
     res.status(404).json("internal error try again ");
   }
