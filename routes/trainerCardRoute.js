@@ -51,23 +51,6 @@ cardTrainRoute.get("/serchByTag/:tag", authM, async (req, res) => {
   } catch (err) {}
 });
 
-//return card by id
-
-cardTrainRoute.get("/:id", authM, async (req, res) => {
-  try {
-    let card = await CardTrain.find({ _id: req.params.id });
-
-    if (!card) {
-      res.status(404).send("אין כרטיס כזה");
-      return;
-    }
-
-    res.send(card);
-  } catch (err) {
-    res.status(404).send("אין כרטיס כזה");
-  }
-});
-
 //get card by given user Id
 
 cardTrainRoute.get("/byUser/:id", authM, async (req, res) => {
@@ -82,6 +65,47 @@ cardTrainRoute.get("/byUser/:id", authM, async (req, res) => {
     res.send(card[0]);
   } catch (err) {
     res.status(404).send("אין נתונים");
+  }
+});
+
+//check if th card exists in the array favorite
+
+cardTrainRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
+  try {
+    let idCard = req.params.idCard;
+
+    if (!idCard) {
+      res.status(400).send("מספר הכרטיס ריק תנסה שוב");
+      return;
+    }
+
+    let card = await UserTable.find({ _id: req.user._id, fDogTrainer: idCard });
+
+    if (card.length == 0) {
+      res.status(200).send(false);
+      return;
+    }
+
+    res.status(200).send(true);
+  } catch (err) {
+    res.status(404).send("internal error");
+  }
+});
+
+//return card by id
+
+cardTrainRoute.get("/:id", authM, async (req, res) => {
+  try {
+    let card = await CardTrain.find({ _id: req.params.id });
+
+    if (!card) {
+      res.status(404).send("אין כרטיס כזה");
+      return;
+    }
+
+    res.send(card);
+  } catch (err) {
+    res.status(404).send("אין כרטיס כזה");
   }
 });
 
@@ -140,27 +164,25 @@ cardTrainRoute.patch("/deleteT", authM, async (req, res) => {
   }
 });
 
-//check if th card exists in the array favorite
-
-cardTrainRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
+//update clock's work
+cardTrainRoute.post("/updateMeet/:cardId", authM, async (req, res) => {
   try {
-    let idCard = req.params.idCard;
+    let data = req.body;
 
-    if (!idCard) {
-      res.status(400).send("מספר הכרטיס ריק תנסה שוב");
+    if (!data) {
+      res.status(400).send("אין נתונים");
       return;
     }
 
-    let card = await UserTable.find({ _id: req.user._id, fDogTrainer: idCard });
+    console.log(data);
+    let user = await CardTrain.updateOne(
+      { _id: req.params.cardId },
+      { $set: { meets: data } }
+    );
 
-    if (card.length == 0) {
-      res.status(200).send(false);
-      return;
-    }
-
-    res.status(200).send(true);
+    res.send(user);
   } catch (err) {
-    res.status(404).send("internal error");
+    res.status(404).send("תקלה בשמירת הנתונים");
   }
 });
 
@@ -264,28 +286,6 @@ cardTrainRoute.delete("/:id", authM, async (req, res) => {
     res.json("הכרטיס נמחק");
   } catch (err) {
     res.status(404).json("internal error try again ");
-  }
-});
-
-//update clock's work
-cardTrainRoute.post("/updateMeet/:cardId", authM, async (req, res) => {
-  try {
-    let data = req.body;
-
-    if (!data) {
-      res.status(400).send("אין נתונים");
-      return;
-    }
-
-    console.log(data);
-    let user = await CardTrain.updateOne(
-      { _id: req.params.cardId },
-      { $set: { meets: data } }
-    );
-
-    res.send(user);
-  } catch (err) {
-    res.status(404).send("תקלה בשמירת הנתונים");
   }
 });
 

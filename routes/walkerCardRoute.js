@@ -67,6 +67,30 @@ cardWalkerRoute.get("/byUser/:id", authM, async (req, res) => {
   }
 });
 
+//check if th card exists in favorite array
+
+cardWalkerRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
+  try {
+    let idCard = req.params.idCard;
+
+    if (!idCard) {
+      res.status(400).send("מספר הכרטיס ריק תנסה שוב");
+      return;
+    }
+
+    let card = await UserTable.find({ _id: req.user._id, fDogWalker: idCard });
+
+    if (card.length == 0) {
+      res.status(200).send(false);
+      return;
+    }
+
+    res.status(200).send(true);
+  } catch (err) {
+    res.status(404).send("internal error");
+  }
+});
+
 //get card by given id
 
 cardWalkerRoute.get("/:id", authM, async (req, res) => {
@@ -133,30 +157,6 @@ cardWalkerRoute.patch("/deleteW", authM, async (req, res) => {
     );
     user = await UserTable.findById(req.user._id);
     res.status(200).json(user);
-  } catch (err) {
-    res.status(404).send("internal error");
-  }
-});
-
-//check if th card exists in favorite array
-
-cardWalkerRoute.get("/checkFvCard/:idCard", authM, async (req, res) => {
-  try {
-    let idCard = req.params.idCard;
-
-    if (!idCard) {
-      res.status(400).send("מספר הכרטיס ריק תנסה שוב");
-      return;
-    }
-
-    let card = await UserTable.find({ _id: req.user._id, fDogWalker: idCard });
-
-    if (card.length == 0) {
-      res.status(200).send(false);
-      return;
-    }
-
-    res.status(200).send(true);
   } catch (err) {
     res.status(404).send("internal error");
   }
