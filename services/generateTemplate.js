@@ -10,7 +10,7 @@ function generateTemplate(mail) {
           </tr>
           <tr ><td><p>http://localhost:3000/reset-password/${mail.userId}/${mail.token}</p></td></tr>
           <tr ><td align="right"><p>לשאלות נוספות ניתן לפנות לכתובת המייל</p></td></tr>
-          <tr ><td align="right">anu.arch.rl@gmail.com</td></tr>
+          <tr ><td align="right">projectdog30@outlook.co.il</td></tr>
       </table>`,
     authenticateUser: "",
     contactUs: "",
