@@ -57,11 +57,11 @@ cardWalkerRoute.get("/byUser/:id", authM, async (req, res) => {
     let card = await CardWalker.find({ user_id: req.params.id });
 
     if (card.length == 0) {
-      res.status(400).send("אין כרטיס כזה");
+      res.status(201).send("אין כרטיס כזה");
       return;
     }
 
-    res.send(card[0]);
+    res.status(200).send(card[0]);
   } catch (err) {
     res.status(404).send("no data");
   }
