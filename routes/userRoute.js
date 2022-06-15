@@ -280,12 +280,42 @@ userRoute.post("/forgot-password", async (req, res) => {
       }
     );
 
-    const subject = "Project-Dog password reset;";
+    const subject = "איפוס סיסמה ";
     const link = `http://localhost:3001/reset-password/${user._id}/${token}`;
     const mail = { userId: user._id, token: token };
     const html = generateTemplate(mail).resetPassword;
 
     const response = await mailReq(user.email, subject, link, html);
+    return res.send(response);
+  } catch (error) {
+    return res.status(500).send(`Opss... An error occurred: ${error.message}`);
+  }
+});
+
+//send mail contact us
+
+userRoute.post("/conatctUs", async (req, res) => {
+  try {
+    const { error } = validateEmail({ email: req.body.email });
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
+
+    const subject = "צור קשר";
+    const link = `http://localhost:3001/contactUs`;
+    const mail = {
+      fullName: req.body.fullName,
+      email: req.body.email,
+      content: req.body.content,
+    };
+    const html = generateTemplate(mail).contactUs;
+
+    const response = await mailReq(
+      "projectdog30@outlook.co.il",
+      subject,
+      link,
+      html
+    );
     return res.send(response);
   } catch (error) {
     return res.status(500).send(`Opss... An error occurred: ${error.message}`);
