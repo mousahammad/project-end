@@ -294,7 +294,7 @@ userRoute.post("/forgot-password", async (req, res) => {
 
 //send mail contact us
 
-userRoute.post("/conatctUs", async (req, res) => {
+userRoute.post("/contactUs", async (req, res) => {
   try {
     const { error } = validateEmail({ email: req.body.email });
     if (error) {
