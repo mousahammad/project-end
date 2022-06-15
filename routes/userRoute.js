@@ -310,12 +310,7 @@ userRoute.post("/contactUs", async (req, res) => {
     };
     const html = generateTemplate(mail).contactUs;
 
-    const response = await mailReq(
-      "projectdog30@outlook.co.il",
-      subject,
-      link,
-      html
-    );
+    const response = await mailReq(config.get("email"), subject, link, html);
     return res.send(response);
   } catch (error) {
     return res.status(500).send(`Opss... An error occurred: ${error.message}`);
