@@ -40,6 +40,7 @@ cardTrainRoute.get("/serchByTag/:tag", authM, async (req, res) => {
     if (!tag) {
       res.status(400).send("לא נשלח תאג לחיפוש");
     }
+
     let cards = await CardTrain.find({ tags: tag });
 
     for (let i = 0; i < cards.length; i++) {
@@ -174,7 +175,6 @@ cardTrainRoute.post("/updateMeet/:cardId", authM, async (req, res) => {
       return;
     }
 
-    console.log(data);
     let user = await CardTrain.updateOne(
       { _id: req.params.cardId },
       { $set: { meets: data } }
